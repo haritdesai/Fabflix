@@ -3,6 +3,8 @@
     String email = request.getParameter("email");    
     String password = request.getParameter("password");
     Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+    //change to your own password
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
             "root", "ryanjew");
     Statement st = con.createStatement();
@@ -12,9 +14,7 @@
         session.setAttribute("userid", rs.getString(1));
         session.setAttribute("firstName", rs.getString(2));
         session.setAttribute("lastName", rs.getString(3));
-        out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName"));
-        //out.println("<a href='logout.jsp'>Log out</a>");
-        //response.sendRedirect("success.jsp");
+        response.sendRedirect("browse.jsp");
     } else {
     	out.println(email);
     	out.println(password);
