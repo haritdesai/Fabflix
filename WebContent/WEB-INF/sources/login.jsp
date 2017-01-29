@@ -12,7 +12,7 @@
         session.setAttribute("userid", rs.getString(1));
         session.setAttribute("firstName", rs.getString(2));
         session.setAttribute("lastName", rs.getString(3));
-        out.println("Welcome ");
+        out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName"));
         //out.println("<a href='logout.jsp'>Log out</a>");
         //response.sendRedirect("success.jsp");
     } else {
