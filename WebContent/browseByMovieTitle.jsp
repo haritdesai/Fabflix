@@ -1,3 +1,4 @@
+<%@ page import ="java.sql.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,6 +9,8 @@
 <h1 align="center">Welcome to Shitty Netflix</h1>
 <div align="center">
 <%
+	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
+            "root", "ryanjew");
     out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
     out.println("You're a bitch");
 %>
@@ -19,6 +22,12 @@
 <a align="center" href="movie.jsp">Movie</a><br>
 <a align="center" href="star.jsp">Star</a><br>
 <a align="center" href="shoppingcart.jsp">Cart</a><br>
-
+<div align ="center">
+<%
+	for(char alphabet = 'A'; alphabet <= 'Z'; alphabet++) 
+	{
+    	out.print("<a href= \"#" + alphabet + "\">" + alphabet + "</a>");
+	}
+%>
 </body>
 </html>
