@@ -16,21 +16,20 @@
 %>
 </div><br>
 <a align="center" href="search.jsp">Search</a><br>
-<a align="center" href="browseByMovieGenre.jsp">Browse by Movie Genre</a><br>
-<a align="center" href="browseByMovieTitle.jsp">Browse by Movie Title</a><br>
+<a align="center" href="browse.jsp">Browse</a><br>
 <a align="center" href="movieList.jsp">Movie List</a><br>
 <a align="center" href="movie.jsp">Movie</a><br>
 <a align="center" href="star.jsp">Star</a><br>
 <a align="center" href="shoppingcart.jsp">Cart</a><br>
-<div align ="center">
+<br>
 <%
-    Statement st = con.createStatement();
+	String genre = request.getParameter("genre");
+	Statement st = con.createStatement();
     ResultSet rs;
-    rs = st.executeQuery("select * from genres");
+    rs = st.executeQuery("select * from movies inner join genres_in_movies on movies.id=genres_in_movies.movie_id where genres_in_movies.genre_id="+genre);
     while (rs.next()) {
-        out.println("<a href=\"#" + rs.getString(2) + "\">" + rs.getString(2) + "</a><br>");
-    }
+    	out.println("<a href=\"movie.jsp?id=" + rs.getString(1) + "\">" + rs.getString(2) + "</a><br>");
+	}
 %>
-</div>
 </body>
 </html>

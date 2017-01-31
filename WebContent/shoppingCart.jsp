@@ -13,8 +13,7 @@
 %>
 </div><br>
 <a align="center" href="search.jsp">Search</a><br>
-<a align="center" href="browseByMovieGenre.jsp">Browse by Movie Genre</a><br>
-<a align="center" href="browseByMovieTitle.jsp">Browse by Movie Title</a><br>
+<a align="center" href="browse.jsp">Browse</a><br>
 <a align="center" href="movieList.jsp">Movie List</a><br>
 <a align="center" href="movie.jsp">Movie</a><br>
 <a align="center" href="star.jsp">Star</a><br>
