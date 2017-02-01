@@ -1,12 +1,19 @@
 <%@ page import ="java.sql.*" %>
+<%@ page import="java.io.*" %>
 <%
     String email = request.getParameter("email");    
     String password = request.getParameter("password");
     Class.forName("com.mysql.jdbc.Driver").newInstance();
 
     //change to your own password
+    String file = application.getRealPath("/") + "pass.txt";
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    String mysqlPass = br.readLine();
+
+
+
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-            "root", "ryanjew");
+            "root", mysqlPass);
     Statement st = con.createStatement();
     ResultSet rs;
     rs = st.executeQuery("select * from customers where email='" + email + "' and password='" + password + "'");

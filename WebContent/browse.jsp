@@ -1,4 +1,5 @@
 <%@ page import ="java.sql.*" %>
+<%@ page import="java.io.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,15 @@
 <h1 align="center">Welcome to Shitty Netflix</h1>
 <div align="center">
 <%
-	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-            "root", "ryanjew");
+String file = application.getRealPath("/") + "pass.txt";
+BufferedReader br = new BufferedReader(new FileReader(file));
+String mysqlPass = br.readLine();
+
+
+
+Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
+        "root", mysqlPass);
+
     out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
     out.println("You're a bitch");
 %>
