@@ -72,8 +72,8 @@
 			sqlQuery += ")";
 		}
 		
-	    out.println(sqlQuery);
-	    out.println();
+	    //out.println(sqlQuery);
+	    //out.println();
 		rs = st.executeQuery(sqlQuery);
 	    while(rs.next()) {
 	 		movieID.put(rs.getInt("id"), rs.getString("title"));
@@ -113,7 +113,7 @@
 <a align="center" href="movieList.jsp">Movie List</a><br>
 <a align="center" href="movie.jsp">Movie</a><br>
 <a align="center" href="star.jsp">Star</a><br>
-<a align="center" href="shoppingcart.jsp">Cart</a><br>
+<a align="center" href="shoppingCart.jsp">Cart</a><br>
 
 </body>
 </html>

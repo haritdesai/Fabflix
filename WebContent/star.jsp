@@ -53,7 +53,7 @@ while (starsRs.next()) {
 <a align="center" href="movieList.jsp">Movie List</a><br>
 <a align="center" href="movie.jsp">Movie</a><br>
 <a align="center" href="star.jsp">Star</a><br>
-<a align="center" href="shoppingcart.jsp">Cart</a><br>
+<a align="center" href="shoppingCart.jsp">Cart</a><br>
 
 </body>
 </html>
