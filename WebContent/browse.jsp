@@ -36,7 +36,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
     ResultSet rs;
     rs = st.executeQuery("select * from genres");
     while (rs.next()) {
-        out.println("<a href=\"browseByMovieGenre.jsp?genre=" + rs.getString(1) + "\">" + rs.getString(2) + "</a>");
+        out.println("<a href=\"movieList.jsp?genre=" + rs.getString(1) + "\">" + rs.getString(2) + "</a>");
         out.print(" | ");
     }
     out.println("<br>");
@@ -44,10 +44,10 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
 
     for(char alphabet = 'A'; alphabet <= 'Z'; alphabet++) 
 	{
-    	out.print("<a href= \"browseByMovieTitle.jsp?title=" + alphabet + "\">" + alphabet + "</a>");
+    	out.print("<a href= \"movieList.jsp?title=" + alphabet + "\">" + alphabet + "</a>");
     	out.print(" | ");
 	}
-	out.println("<a href=\"browseByMovieTitle.jsp?title=0\">#</a>");
+	out.println("<a href=\"movieList.jsp?title=0\">#</a>");
 %>
 </div>
 </body>
