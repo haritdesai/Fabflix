@@ -44,7 +44,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
         	out.print("<a href=star.jsp?id=" + starsRs.getInt(1) + ">" + 
         			starsRs.getString(2) + " " + starsRs.getString(3) + "</a>" + " | ");
         }
-        out.print("<br>Banner: <a href=" + moviesRs.getString(5) + ">" + moviesRs.getString(5) + "</a>");
+        out.print("<br><img src=\"" + moviesRs.getString(5) + "\" alt=\"Missing Photo\">");
         out.print("<br>Trailer URL: <a href=" + moviesRs.getString(6) + ">" + moviesRs.getString(6) + "</a>");
     }
 

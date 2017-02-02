@@ -37,7 +37,7 @@ starsRs = starsSt.executeQuery("select * from stars where id = " + id);
 while (starsRs.next()) {
 	out.print("<br><br>Name: " + starsRs.getString(2) + " " + starsRs.getString(3));
     out.print("<br>DOB: " + starsRs.getDate(4));
-    out.print("<br>Photo URL: <a href=" + starsRs.getString(5) + ">" + starsRs.getString(5) + "</a>");
+    out.print("<br><img src=\"" + starsRs.getString(5) + "\" alt=\"Missing Photo\">");
     out.print("<br>Movies: | ");
     while(moviesRs.next()){
     	out.print("<a href=movie.jsp?id=" + moviesRs.getInt(1) + ">" + 
