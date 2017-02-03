@@ -16,6 +16,9 @@
 		body {
 			background-image: url("images/doge.png");
 		}
+		.my-container {
+			padding-top: 300px;
+		}
 	</style>
 </head>
 
@@ -24,7 +27,7 @@
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
 
- 	<div class="row">
+ 	<div class="row my-container">
  		<div class="col m4"></div>
  		<div class="col s12 m4">
  			<div class="card white">
@@ -53,5 +56,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

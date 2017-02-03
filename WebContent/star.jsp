@@ -3,18 +3,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Fabflix</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!--Import fabflix.css-->
+    <link type="text/css" rel="stylesheet" href="css/fabflix.css"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fabflix</title>
 </head>
+<body>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 
-<body BGCOLOR="#FDF5E6">
-<div>
-<%
-out.println("Current session: " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
-%>
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="/mywebapp" class="brand-logo brand-logo-small">
+                <span class="bold">Fabflix</span>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
+                <li><a href="browse.jsp">Browse</a></li>
+        <!--         <li><a href="movieList.jsp">Movie List</a></li>
+                <li><a href="movie.jsp">Movie</a></li>
+                <li><a href="star.jsp">Star</a></li> -->
+                <li><a href="shoppingCart.jsp">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
 </div>
+<br>
 
-<h1 align="center">Star</h1>
-<div align="center">
+<div class="container">
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card white">
+                <div class="card-content black-text">
 <%
 String file = application.getRealPath("/") + "pass.txt";
 BufferedReader br = new BufferedReader(new FileReader(file));
@@ -35,7 +62,7 @@ ResultSet starsRs;
 starsRs = starsSt.executeQuery("select * from stars where id = " + id);
 
 while (starsRs.next()) {
-	out.print("<br><br>Name: " + starsRs.getString(2) + " " + starsRs.getString(3));
+	out.print("<span class=\"card-title\">" + starsRs.getString(2) + " " + starsRs.getString(3) + "</span>");
     out.print("<br>DOB: " + starsRs.getDate(4));
     out.print("<br><img src=\"" + starsRs.getString(5) + "\" alt=\"Missing Photo\">");
     out.print("<br>Movies: | ");
@@ -45,15 +72,14 @@ while (starsRs.next()) {
     }
 }
 %>
-</div><br>
-<a align="center" href="search.jsp">Search</a><br>
-<a align="center" href="browse.jsp">Browse</a><br>
-<a align="center" href="browseByMovieGenre.jsp">Browse by Movie Genre</a><br>
-<a align="center" href="browseByMovieTitle.jsp">Browse by Movie Title</a><br>
-<a align="center" href="movieList.jsp">Movie List</a><br>
-<a align="center" href="movie.jsp">Movie</a><br>
-<a align="center" href="star.jsp">Star</a><br>
-<a align="center" href="shoppingCart.jsp">Cart</a><br>
 
+                </div>
+                <div class="card-action">
+                    <a href="#">This is a link</a>
+                    <a href="#">This is a link</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

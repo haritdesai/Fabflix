@@ -5,15 +5,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Fabflix</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!--Import fabflix.css-->
+    <link type="text/css" rel="stylesheet" href="css/fabflix.css"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fabflix</title>
 </head>
+<body>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 
-<body BGCOLOR="#FDF5E6">
-<h1 align="center">Welcome to Shitty Netflix</h1>
-<div align="center">
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="/mywebapp" class="brand-logo brand-logo-small">
+                <span class="bold">Fabflix</span>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
+                <li><a href="browse.jsp">Browse</a></li>
+<!--                 <li><a href="movieList.jsp">Movie List</a></li>
+                <li><a href="movie.jsp">Movie</a></li>
+                <li><a href="star.jsp">Star</a></li> -->
+                <li><a href="shoppingCart.jsp">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<br>
+<div class="container">
+	<div class="collection with-header">
+		<li class="collection-header"><h4>Movies</h4></li>
 <%
-    out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
-    out.println("You're a bitch");
+    // out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
+    // out.println("You're a bitch");
     
     String file = application.getRealPath("/") + "pass.txt";
     BufferedReader br = new BufferedReader(new FileReader(file));
@@ -79,7 +109,7 @@
 	 		movieID.put(rs.getInt("id"), rs.getString("title"));
 	    }
 	    for (Map.Entry<Integer,String> entry: movieID.entrySet()) {
-	    	out.println("<a href=\"movie.jsp?id=" + entry.getKey() + "\">" + entry.getValue() + "</a><br>");
+	    	out.println("<a href=\"movie.jsp?id=" + entry.getKey() + "\" class=\"collection-item\">" + entry.getValue() + "</a>");
 	    }
 	    
     } else if  (request.getParameter("title") != null){
@@ -93,7 +123,7 @@
             rs = st.executeQuery("select * from movies where title like '" + title + "%'");
         }
         while (rs.next()) {
-        	out.println("<a href=\"movie.jsp?id=" + rs.getString(1) + "\">" + rs.getString(2) + "</a><br>");
+        	out.println("<a href=\"movie.jsp?id=" + rs.getString(1) + "\" class=\"collection-item\">" + rs.getString(2) + "</a>");
     	}
 
     } else if (request.getParameter("genre") != null) {
@@ -102,18 +132,12 @@
         ResultSet rs;
         rs = st.executeQuery("select * from movies inner join genres_in_movies on movies.id=genres_in_movies.movie_id where genres_in_movies.genre_id="+genre);
         while (rs.next()) {
-        	out.println("<a href=\"movie.jsp?id=" + rs.getString(1) + "\">" + rs.getString(2) + "</a><br>");
+        	out.println("<a href=\"movie.jsp?id=" + rs.getString(1) + "\" class=\"collection-item\">" + rs.getString(2) + "</a>");
     	}
     }
     
 %>
-</div><br>
-<a align="center" href="search.jsp">Search</a><br>
-<a align="center" href="browse.jsp">Browse</a><br>
-<a align="center" href="movieList.jsp">Movie List</a><br>
-<a align="center" href="movie.jsp">Movie</a><br>
-<a align="center" href="star.jsp">Star</a><br>
-<a align="center" href="shoppingCart.jsp">Cart</a><br>
-
+	</div>
+</div>
 </body>
 </html>

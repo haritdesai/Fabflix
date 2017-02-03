@@ -2,29 +2,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Fabflix</title>
+    <!--Import Google Icon Font-->
+    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+    <!--Import fabflix.css-->
+    <link type="text/css" rel="stylesheet" href="css/fabflix.css"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Fabflix</title>
 </head>
+<body>
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="js/materialize.min.js"></script>
 
-<body BGCOLOR="#FDF5E6">
-<h1 align="center">Welcome to Shitty Netflix</h1>
-<div align="center">
+<div class="navbar-fixed">
+    <nav>
+        <div class="nav-wrapper container">
+            <a href="/mywebapp" class="brand-logo brand-logo-small">
+                <span class="bold">Fabflix</span>
+            </a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
+                <li><a href="browse.jsp">Browse</a></li>
+<!--                 <li><a href="movieList.jsp">Movie List</a></li>
+                <li><a href="movie.jsp">Movie</a></li>
+                <li><a href="star.jsp">Star</a></li> -->
+                <li><a href="shoppingCart.jsp">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<br>
+<div class="container">
 <%
-    out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
-	out.println("You can search for movies by title, director, year, or star.");
-    out.println("Begin your search by entering information below!");
+  out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
+  out.println("You can search for movies by title, director, year, or star.");
+  out.println("Begin your search by entering information below!");
 %>
-</div><br>
+<br>
 
-<form action="movieList.jsp"
-      method="post">
-  <div align="center">Title <input type="text" name="title"></div><br>
+  <form action="movieList.jsp"
+        method="post">
+    <div align="center">Title <input type="text" name="title"></div><br>
 
-  <div align="center">Director <input type="text" name="director"></div><br>
-  <div align="center">Year <input type="text" name="year"></div><br>
-  <div align="center">Star's First Name <input type="text" name="firstName"></div><br>
-  <div align="center">Star's Last Name <input type="text" name="lastName"></div><br>
-  <div align="center"><input type="submit" name="search" value="Search"></div><br>
-</form>
-
+    <div align="center">Director <input type="text" name="director"></div><br>
+    <div align="center">Year <input type="text" name="year"></div><br>
+    <div align="center">Star's First Name <input type="text" name="firstName"></div><br>
+    <div align="center">Star's Last Name <input type="text" name="lastName"></div><br>
+    <button class="btn waves-effect waves-light" type="submit" name="search" value="Search">Submit
+      <i class="material-icons right">send</i>
+    </button>
+  </form>
+</div>
 </body>
 </html>

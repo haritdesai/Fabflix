@@ -1,0 +1,16 @@
+body {
+	background-color: #fafafa;
+/*background-image: url("../images/movies.jpg");*/
+}
+
+nav {
+	background-color: #ffffff;
+}
+
+nav ul a {
+	color: #212121;
+}
+
+nav .brand-logo {
+	color: #212121;
+}
