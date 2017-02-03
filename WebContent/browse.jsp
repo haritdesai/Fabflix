@@ -35,7 +35,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper container">
-            <a href="/mywebapp" class="brand-logo brand-logo-small">
+            <a href="/mywebapp/browse.jsp" class="brand-logo brand-logo-small">
                 <span class="bold">Fabflix</span>
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -52,8 +52,9 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
 <br>
 <div class="container">
     <div class="row">
-        <div class="col s6 m5 collection with-header">
-            <li class="collection-header"><h4>Genre</h4></li>
+        <div class="col s6 m6">
+            <div class="container collection with-header"> 
+                <li class="collection-header"><h4>Genre</h4></li>
 <%
     Statement st = con.createStatement();
     ResultSet rs;
@@ -63,10 +64,11 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
         //out.print(" | ");
     }
 %>
+            </div>
         </div>
-        <div class="col m2"></div>
-        <div class="col s6 m5 collection with-header">
-            <li class="collection-header"><h4>Alphanumeric</h4></li>
+        <div class="col s6 m6">
+            <div class="container collection with-header">
+                <li class="collection-header"><h4>Alphanumeric</h4></li>
 <%
 
     for(char alphabet = 'A'; alphabet <= 'Z'; alphabet++) 
@@ -75,6 +77,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
 	}
 	out.println("<a href=\"movieList.jsp?title=0\" class=\"collection-item\">#</a>");
 %>
+            </div>
         </div>
     </div>
 </div>
