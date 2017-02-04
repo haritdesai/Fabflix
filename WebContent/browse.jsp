@@ -20,6 +20,10 @@
 
 <!-- <h1 align="center">Welcome to Shitty Netflix</h1> -->
 <%
+if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
+	  response.sendRedirect("index.jsp");
+}
+
 String file = application.getRealPath("/") + "pass.txt";
 BufferedReader br = new BufferedReader(new FileReader(file));
 String mysqlPass = br.readLine();

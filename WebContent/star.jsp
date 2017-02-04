@@ -43,6 +43,10 @@
             <div class="card white">
                 <div class="card-content black-text">
 <%
+if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
+	  response.sendRedirect("index.jsp");
+}
+
 String file = application.getRealPath("/") + "pass.txt";
 BufferedReader br = new BufferedReader(new FileReader(file));
 String mysqlPass = br.readLine();

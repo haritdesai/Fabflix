@@ -37,6 +37,10 @@
 <br>
 <div class="container">
 <%
+  if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
+	  response.sendRedirect("index.jsp");
+  }
+
   out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
   out.println("You can search for movies by title, director, year, or star.");
   out.println("Begin your search by entering information below!");
