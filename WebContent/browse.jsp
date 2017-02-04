@@ -32,6 +32,11 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
     // out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
     // out.println("You're a bitch");
 %>
+
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="/mywebapp">Sign Out</a></li>
+</ul>
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper container">
@@ -45,6 +50,9 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                 <li><a href="movie.jsp">Movie</a></li>
                 <li><a href="star.jsp">Star</a></li> -->
                 <li><a href="shoppingCart.jsp">Cart</a></li>
+<%
+                out.println("<li><a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+%>
             </ul>
         </div>
     </nav>
@@ -82,4 +90,9 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
     </div>
 </div>
 </body>
+<script>
+    $(document).ready(function(){
+        $(".dropdown-button").dropdown();
+    });
+</script>
 </html>

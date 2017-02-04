@@ -101,14 +101,11 @@
 		<!-- <a class="grey-text text-darken-4 right" href="#!">More Links</a> -->
 		</div>
 	</div>
-</footer>
-            
- 	
+</footer>	
 
 </body>
 
 <script>
-
     $(document).ready(function(){
       $('.parallax').parallax();
     });

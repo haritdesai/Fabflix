@@ -22,3 +22,11 @@ footer.page-footer {
 .container {
 	color: #212121;
 }
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating) {
+	color: #ff9100;
+}
+
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-large):not(.btn-floating):hover {
+	color: #ffab40;
+}
