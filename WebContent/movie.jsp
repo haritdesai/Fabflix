@@ -78,8 +78,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
 
                 </div>
                 <div class="card-action">
-                    <a href="#">This is a link</a>
-                    <a href="#">This is a link</a>
+                    <a href="#">Add to Cart</a>
                 </div>
             </div>
         </div>
