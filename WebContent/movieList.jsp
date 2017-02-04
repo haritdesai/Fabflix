@@ -182,7 +182,7 @@
     
     ArrayList<String> resultList = new ArrayList<String>();
     while(moviesRs.next()){
-    	resultList.add("<br><a href=movie.jsp?id=" + moviesRs.getInt(1) + " class=\"collection-item\">" + moviesRs.getString(2) + "</a>");
+    	resultList.add("<a href=movie.jsp?id=" + moviesRs.getInt(1) + " class=\"collection-item\">" + moviesRs.getString(2) + "</a>");
     }
     
     /* end store results in arrayList */
@@ -202,63 +202,57 @@
     int lastPage = resultList.size()/10 + 1;
     
     out.print("<br><br>");
+    out.print("<ul align=\"center\" class=\"pagination\">");
     if(pageNumber == 1){ // start case 
-    	for(int i = 1; (i <= lastPage) && i < 9; i++){
+    	for(int i = 1; (i <= lastPage) && i < 11; i++){
     		if(i == pageNumber){
-    			out.print(Integer.toString(i));
-    			if(lastPage != 1){
-    				 out.print("  |  ");
-    			}
+    			out.print("<li class=\"active\"><a href=\"#!\">1</li>");
     		} else {
-    			out.print("<a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
-            			"</a>  |  ");
+    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
+            			"</a></li>");
     		}
     	}
     	if(lastPage != 1){
-        	out.print("<a href=movieList.jsp?page=" + Integer.toString(pageNumber+1) + parameters + ">" +
-        			"next ></a>  |  ");
-        	out.print("<a href=movieList.jsp?page=" + Integer.toString(lastPage) + parameters + ">" +
-        			"last >></a>");
+        	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber+1) + parameters + ">" +
+        			"<i class=\"material-icons\">chevron_right</i></a></li>");
+        	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(lastPage) + parameters + ">" +
+        			"<i class=\"material-icons\">fast_forward</i></a></li>");
     	}
     }
     else if(pageNumber == lastPage){ // end case
-    	out.print("<a href=movieList.jsp?page=1" + parameters + ">" +
-    			"<< first</a>  |  ");
-    	out.print("<a href=movieList.jsp?page=" + Integer.toString(pageNumber-1) + parameters + ">" +
-    			"< prev</a>  |  ");
-    	for(int i = (lastPage-9 < 1 ? 1 : lastPage-9); (i <= lastPage); i++){
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=1" + parameters + ">" +
+    			"<i class=\"material-icons\">fast_rewind</i></a></li>");
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber-1) + parameters + ">" +
+    			"<i class=\"material-icons\">chevron_left</i></a></li>");
+    	for(int i = (lastPage-11 < 1 ? 1 : lastPage-11); (i <= lastPage); i++){
     		if(i == pageNumber){
-    			out.print(Integer.toString(i));
-    			if (i != lastPage){
-    				out.print("  |  ");
-    			}
+    			out.print("<li class=\"active\"><a href=\"#!\">"+ Integer.toString(i) +"</li>");
     		} else {
-    			out.print("<a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
-            			"</a>  |  ");
+    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
+            			"</a></li>");
     		}
     	}
     }
     else{ // middle cases
-    	out.print("<a href=movieList.jsp?page=1" + parameters + ">" +
-    			"<< first</a>  |  ");
-    	out.print("<a href=movieList.jsp?page=" + Integer.toString(pageNumber-1) + parameters + ">" +
-    			"< prev</a>  |  ");
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=1" + parameters + ">" +
+    			"<i class=\"material-icons\">fast_rewind</i></a></li>");
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber-1) + parameters + ">" +
+    			"<i class=\"material-icons\">chevron_left</i></a></li>");
     	
-    	for(int i = (pageNumber-4 < 1 ? 1 : pageNumber-4); (i < pageNumber+5) && (i <= lastPage); i++){
+    	for(int i = (pageNumber-5 < 1 ? 1 : pageNumber-4); (i < pageNumber+6) && (i <= lastPage); i++){
     		if(i == pageNumber){
-    			out.print(Integer.toString(i) + "  |  ");
+    			out.print("<li class=\"active\"><a href=\"#!\">"+ Integer.toString(i) +"</li>");
     		} else {
-    			out.print("<a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
-            			"</a>  |  ");
+    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
+            			"</a></li>");
     		}
     	}
-    		
-    	out.print("<a href=movieList.jsp?page=" + Integer.toString(pageNumber+1) + parameters + ">" +
-    			"next ></a>  |  ");
-    	out.print("<a href=movieList.jsp?page=" + Integer.toString(lastPage) + parameters + ">" +
-    			"last >></a>");
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber+1) + parameters + ">" +
+    			"<i class=\"material-icons\">chevron_right</i></a></li>");
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(lastPage) + parameters + ">" +
+    			"<i class=\"material-icons\">fast_forward</i></a></li>");
     }
-    
+    out.print("</ul>");
     /* end pagination footer */
 %>
 	</div>

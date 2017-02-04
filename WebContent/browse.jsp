@@ -40,7 +40,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
-                <li><a href="browse.jsp">Browse</a></li>
+                <li class="active"><a href="browse.jsp">Browse</a></li>
                 <!-- <li><a href="movieList.jsp">Movie List</a></li>
                 <li><a href="movie.jsp">Movie</a></li>
                 <li><a href="star.jsp">Star</a></li> -->
