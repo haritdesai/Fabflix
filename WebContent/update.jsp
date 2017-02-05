@@ -12,13 +12,19 @@
 <%
 	HashMap<String,Integer> cart = new HashMap<String,Integer>();
 	cart = (HashMap<String,Integer>)session.getAttribute("cart");
-
+	Set<String> toRemove = new HashSet<String>();
+	
 	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
 		//out.println(entry.getKey());
 		//out.println(request.getParameter(entry.getKey()));
 		cart.put(entry.getKey(), Integer.parseInt(request.getParameter(entry.getKey())));
+		if (entry.getValue() == 0) {
+			toRemove.add(entry.getKey());
+		}
 	}
-
+	
+	cart.keySet().removeAll(toRemove);
+	
 	response.sendRedirect("shoppingCart.jsp");
 %>
 
