@@ -31,9 +31,6 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
                 <li class="active"><a href="browse.jsp">Browse</a></li>
-                <!-- <li><a href="movieList.jsp">Movie List</a></li>
-                <li><a href="movie.jsp">Movie</a></li>
-                <li><a href="star.jsp">Star</a></li> -->
                 <li><a href="shoppingCart.jsp">Cart</a></li>
 <%
                 out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
