@@ -105,9 +105,9 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
 %>
                 	<br><br><a class="waves-effect waves-light btn" href="addToCart.jsp">Add to Cart<i class="material-icons right">shopping_cart</i></a>
                 
-                	<!-- <form method="post" action="addToCart.jsp">
-                		<input name="cart" type="submit" value="Add to Cart" onClick="this.value='Added to Cart'"/>
-                	</form> -->
+                	<form method="post" action="addToCart.jsp">
+                		<br><input class="waves-effect waves-light btn" name="cart" type="submit" value="Add to Cart" onClick="this.value='Added to Cart'"/>
+                	</form>
                 </div>
                 </div>
             </div>

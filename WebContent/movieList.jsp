@@ -201,7 +201,7 @@
         genreRs = genreSt.executeQuery("select * from genres, genres_in_movies where movie_id = " + moviesRs.getInt(1) + " and genre_id = id");
     	    
     	
-    	String temp = "<br>ID: " + moviesRs.getInt(1) + "<br>Year: " + moviesRs.getInt(3) +
+    	String temp = "ID: " + moviesRs.getInt(1) + "<br>Year: " + moviesRs.getInt(3) +
     			"<br>Director: " + moviesRs.getString(4) + "<br>Stars: ";
         while(starsRs.next()){
         	temp += "<a class=\"chip\" href=star.jsp?id=" + starsRs.getInt(1) + ">" + 
@@ -214,8 +214,9 @@
         }
         
     	resultList.add("<li><div class=\"collapsible-header\">"+ moviesRs.getString(2)
-        +"</div><div class=\"collapsible-body\"><span><a href=movie.jsp?id=" 
-        + moviesRs.getInt(1) + ">Title: " + moviesRs.getString(2) + "</a>"+ temp+"</span></div>");
+        + "<a href=movie.jsp?id=" + moviesRs.getInt(1) + 
+        " class=\"secondary-content\"><i class=\"material-icons\">movies</i></a></div>" +
+        "<div class=\"collapsible-body\"><span>" + temp + "</span></div>");
     }
     
     
