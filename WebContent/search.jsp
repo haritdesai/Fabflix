@@ -55,11 +55,13 @@
                 <div class="card-content black-text">
                     <span class="card-title">Search</span>
                     <form action="movieList.jsp" method="post">
-                        <div>Title <input type="text" name="title"></div><br>
-                        <div>Director <input type="text" name="director"></div><br>
-                        <div>Year <input type="text" name="year"></div><br>
-                        <div>Star's First Name <input type="text" name="firstName"></div><br>
-                        <div>Star's Last Name <input type="text" name="lastName"></div>
+                    	<div class="row">
+                        	<div class="col s6"></div>Title <input type="text" name="title"></div>
+                        	<div class="col s6">Director <input type="text" name="director"></div>
+                        	<div class="col s6">Year <input type="text" name="year"></div>
+                        	<div class="col s6">Star's First Name <input type="text" name="firstName"></div>
+                        	<div class="col s6">Star's Last Name <input type="text" name="lastName"></div>
+                        </div>
                 </div>
                 <div class="card-action">
                     <button class="btn waves-effect waves-light" type="submit" name="search" value="Search">Submit
