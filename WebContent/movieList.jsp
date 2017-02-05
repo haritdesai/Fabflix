@@ -44,7 +44,11 @@
 <br>
 <div class="container">
 	<div class="collection with-header">
-		<li class="collection-header"><h4>Movies</h4></li>
+		<li class="collection-header">
+			<div class="row">
+				<div class="col s2">
+					<h4>Movies</h4>
+				</div>
 <%
 	if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
 	  response.sendRedirect("index.jsp");
@@ -136,10 +140,13 @@
         	parameters += "&year=" + year;
         }	
     }
-      
-    /* sorting header */
+%>
     
-    out.print("<br><br><div align=\"center\">");
+
+<div class="col s4 offset-s6">  
+<%
+	/* sorting header */
+    out.print("<br><div align=\"center\">");
     if(Objects.equals(sort,"desc")){
     	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=asc >" +
     			"Z-A<i class=\"material-icons right\">swap_vert</i></a>    ");
@@ -172,8 +179,13 @@
     	query += "order by title asc";
     }
     out.print("</div>");
-    
     /* end sorting header */
+%>
+</div>
+</div>
+
+<%
+    
     
         /* run query */
     // System.out.println(query);
@@ -215,16 +227,18 @@
         " class=\"secondary-content\"><i class=\"material-icons\">movies</i></a></div>" +
         "<div class=\"collapsible-body\"><span>" + temp + "</span></div>");
     }
-    
-    
-    
+
     /* end store results in arrayList */
-    
+%>   
+
+<div class="row">
+	<div align="center" class="col s12"> 
+<%    
     /* pagination header */
     
     int lastPage = resultList.size()/10 + 1;
     
-    out.print("<br><ul align=\"center\" class=\"pagination\">");
+    out.print("<ul class=\"pagination\">");
     if(pageNumber == 1){ // start case 
     	for(int i = 1; (i <= lastPage) && i < 11; i++){
     		if(i == pageNumber){
@@ -277,9 +291,13 @@
     out.print("</ul>");
     /* end pagination header */
     
+%>
+	</div>
+</div>
+<%
     /* movie results */
     
-    out.print("<br><br><ul class=\"collapsible\" data-collapsible=\"accordion\">");
+    out.print("<ul class=\"collapsible\" data-collapsible=\"accordion\">");
     for(int i = (pageNumber*10 - 10); i < pageNumber*10; i++){
     	if (i < resultList.size())
     		out.print(resultList.get(i));
@@ -288,9 +306,14 @@
     
     /* end movie results */
     
+%>
+
+<div class="row">
+	<div align="center" class="col s12"> 
+<%
+
     /* pagination footer */
     
-    out.print("<br><br>");
     out.print("<ul align=\"center\" class=\"pagination\">");
     if(pageNumber == 1){ // start case 
     	for(int i = 1; (i <= lastPage) && i < 11; i++){
@@ -344,6 +367,8 @@
     out.print("</ul>");
     /* end pagination footer */
 %>
+	</div>
+</div>
 	</div>
 </div>
 </body>
