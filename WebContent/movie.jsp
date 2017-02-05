@@ -46,9 +46,10 @@
 
 <div class="container">
     <div class="row">
-        <div class="col s12 m6">
-            <div class="card white">
-                <div class="card-content black-text">
+        <div class="col s15 m">
+            <div class="card horizontal">
+            	<div class="card-image">
+                
 <%  
 if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
 	  response.sendRedirect("index.jsp");
@@ -72,29 +73,41 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
     ResultSet starsRs;
     starsRs = starsSt.executeQuery("select * from stars, stars_in_movies where movie_id = " + id + " and star_id = id");
     
+    Statement genreSt = con.createStatement();
+    ResultSet genreRs;
+    genreRs = genreSt.executeQuery("select * from genres, genres_in_movies where movie_id = " + id + " and genre_id = id");
+    
+
     while (moviesRs.next()) {
+    	out.print("<img src=" + moviesRs.getString(5) + " alt=\"Missing Photo\" style=\"width:200px;height:380px;\"></div><div class=\"card-content black-text\">");
+    	
     	out.print("<span class=\"card-title\">" + moviesRs.getString(2) + "</span>");
     	session.setAttribute("title", moviesRs.getString(2)); /*for access in addToCard.jsp*/
     	session.setAttribute("url", request.getRequestURL().toString());
     	session.setAttribute("id", id);
+    	out.print("<br>ID: " + moviesRs.getInt(1));
         out.print("<br>Year: " + moviesRs.getInt(3));
         out.print("<br>Director: " + moviesRs.getString(4));
-        out.print("<br>Stars: | ");
+        out.print("<br>Stars: ");
         while(starsRs.next()){
-        	out.print("<a href=star.jsp?id=" + starsRs.getInt(1) + ">" + 
-        			starsRs.getString(2) + " " + starsRs.getString(3) + "</a>" + " | ");
+        	out.print("<a class=\"chip\" href=star.jsp?id=" + starsRs.getInt(1) + ">" + 
+        			starsRs.getString(2) + " " + starsRs.getString(3) + "</a>");
         }
-        out.print("<br><img src=\"" + moviesRs.getString(5) + "\" alt=\"Missing Photo\">");
-        out.print("<br>Trailer URL: <a href=" + moviesRs.getString(6) + ">" + moviesRs.getString(6) + "</a>");
+        out.print("<br>Genres: ");
+        while(genreRs.next()){
+        	out.print("<a class=\"chip\" href=movieList.jsp?genre=" + genreRs.getInt(1) + ">" + 
+        			genreRs.getString(2) + "</a>");
+        }
+        out.print("<div class=\"card-action\"><a class=\"waves-effect waves-light btn\" href=" + moviesRs.getString(6) + ">Trailer<i class=\"material-icons right\">movie</i></a>");
     }
 	
 %>
-
-                </div>
-                <div class="card-action">
-                	<form method="post" action="addToCart.jsp">
+                	<br><br><a class="waves-effect waves-light btn" href="addToCart.jsp">Add to Cart<i class="material-icons right">shopping_cart</i></a>
+                
+                	<!-- <form method="post" action="addToCart.jsp">
                 		<input name="cart" type="submit" value="Add to Cart" onClick="this.value='Added to Cart'"/>
-                	</form>
+                	</form> -->
+                </div>
                 </div>
             </div>
         </div>
