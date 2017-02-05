@@ -38,7 +38,7 @@
                 <li><a href="star.jsp">Star</a></li> -->
                 <li><a href="shoppingCart.jsp">Cart</a></li>
 <%
-                out.println("<li><a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
 %>
             </ul>
         </div>
