@@ -215,7 +215,7 @@
         
     	resultList.add("<li><div class=\"collapsible-header\">"+ moviesRs.getString(2)
         +"</div><div class=\"collapsible-body\"><span><a href=movie.jsp?id=" 
-        + moviesRs.getInt(1) + ">Title: </a>"+ moviesRs.getString(2) + temp+"</span></div>");
+        + moviesRs.getInt(1) + ">Title: " + moviesRs.getString(2) + "</a>"+ temp+"</span></div>");
     }
     
     
