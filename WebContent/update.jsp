@@ -17,7 +17,11 @@
 	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
 		//out.println(entry.getKey());
 		//out.println(request.getParameter(entry.getKey()));
+		try {
 		cart.put(entry.getKey(), Integer.parseInt(request.getParameter(entry.getKey())));
+		} catch (Exception e) {
+			continue;
+		}
 		if (entry.getValue() == 0) {
 			toRemove.add(entry.getKey());
 		}
