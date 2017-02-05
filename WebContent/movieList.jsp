@@ -184,12 +184,41 @@
     
     
     
+    
+  	
     /* store results in arrayList */
+    
+   
     
     ArrayList<String> resultList = new ArrayList<String>();
     while(moviesRs.next()){
-    	resultList.add("<a href=movie.jsp?id=" + moviesRs.getInt(1) + " class=\"collection-item\">" + moviesRs.getString(2) + "</a>");
+   		Statement starsSt = con.createStatement();
+   		ResultSet starsRs;
+   	    starsRs = starsSt.executeQuery("select * from stars, stars_in_movies where movie_id = " + moviesRs.getInt(1) + " and star_id = id");
+    	    
+   	    Statement genreSt = con.createStatement();
+ 	    ResultSet genreRs;
+        genreRs = genreSt.executeQuery("select * from genres, genres_in_movies where movie_id = " + moviesRs.getInt(1) + " and genre_id = id");
+    	    
+    	
+    	String temp = "<br>ID: " + moviesRs.getInt(1) + "<br>Year: " + moviesRs.getInt(3) +
+    			"<br>Director: " + moviesRs.getString(4) + "<br>Stars: ";
+        while(starsRs.next()){
+        	temp += "<a class=\"chip\" href=star.jsp?id=" + starsRs.getInt(1) + ">" + 
+        			starsRs.getString(2) + " " + starsRs.getString(3) + "</a>";
+        }
+        temp += "<br>Genres: ";
+        while(genreRs.next()){
+        	temp += "<a class=\"chip\" href=movieList.jsp?genre=" + genreRs.getInt(1) + ">" + 
+        			genreRs.getString(2) + "</a>";
+        }
+        
+    	resultList.add("<li><div class=\"collapsible-header\">"+ moviesRs.getString(2)
+        +"</div><div class=\"collapsible-body\"><span><a href=movie.jsp?id=" 
+        + moviesRs.getInt(1) + ">Title: </a>"+ moviesRs.getString(2) + temp+"</span></div>");
     }
+    
+    
     
     /* end store results in arrayList */
     
@@ -252,11 +281,12 @@
     
     /* movie results */
     
-    out.print("<br><br>");
+    out.print("<br><br><ul class=\"collapsible\" data-collapsible=\"accordion\">");
     for(int i = (pageNumber*10 - 10); i < pageNumber*10; i++){
     	if (i < resultList.size())
     		out.print(resultList.get(i));
     }
+    out.print("</ul>");
     
     /* end movie results */
     
