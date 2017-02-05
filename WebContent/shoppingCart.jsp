@@ -1,9 +1,5 @@
-<<<<<<< HEAD
 <%@ page import ="java.sql.*" %>
 <%@ page import="java.io.*" %>
-=======
-<%@ page import="java.util.*"%>
->>>>>>> aca1ea09570059e0d7fece38a623899d7a9dfdff
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +18,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
-<<<<<<< HEAD
 <!-- <h1 align="center">Welcome to Shitty Netflix</h1> -->
 <%
 String file = application.getRealPath("/") + "pass.txt";
@@ -63,36 +58,6 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
     </nav>
 </div>
 <br>
-=======
-<body BGCOLOR="#FDF5E6">
-<h1 align="center">Shopping Cart</h1>
-<div align="center">
-<%
-	if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
-	  response.sendRedirect("index.jsp");
-	}
-
-    out.println("Welcome " + session.getAttribute("firstName") + " " + session.getAttribute("lastName") + ". ");
-    out.println("<br></br>");
-    out.println("Movies:");
-    
-    Map<String,Integer> cart = (HashMap<String,Integer>)session.getAttribute("cart");
-    
-    if (!cart.isEmpty()) {
-	    for (Map.Entry<String,Integer> entry: cart.entrySet())
-	    	out.println("<br></br>" + entry.getKey() + ": " + entry.getValue());
-    }
-    
-%>
-
-</div><br>
-<a align="center" href="search.jsp">Search</a><br>
-<a align="center" href="browse.jsp">Browse</a><br>
-<a align="center" href="movieList.jsp">Movie List</a><br>
-<a align="center" href="movie.jsp">Movie</a><br>
-<a align="center" href="star.jsp">Star</a><br>
-<a align="center" href="shoppingCart.jsp">Cart</a><br>
->>>>>>> aca1ea09570059e0d7fece38a623899d7a9dfdff
 
 </body>
 </html>
