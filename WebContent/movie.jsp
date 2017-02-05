@@ -43,6 +43,10 @@
             <div class="card white">
                 <div class="card-content black-text">
 <%  
+if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
+	  response.sendRedirect("index.jsp");
+}
+
 String file = application.getRealPath("/") + "pass.txt";
 BufferedReader br = new BufferedReader(new FileReader(file));
 String mysqlPass = br.readLine();
@@ -63,6 +67,9 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
     
     while (moviesRs.next()) {
     	out.print("<span class=\"card-title\">" + moviesRs.getString(2) + "</span>");
+    	session.setAttribute("title", moviesRs.getString(2)); /*for access in addToCard.jsp*/
+    	session.setAttribute("url", request.getRequestURL().toString());
+    	session.setAttribute("id", id);
         out.print("<br>Year: " + moviesRs.getInt(3));
         out.print("<br>Director: " + moviesRs.getString(4));
         out.print("<br>Stars: | ");
@@ -73,12 +80,14 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
         out.print("<br><img src=\"" + moviesRs.getString(5) + "\" alt=\"Missing Photo\">");
         out.print("<br>Trailer URL: <a href=" + moviesRs.getString(6) + ">" + moviesRs.getString(6) + "</a>");
     }
-
+	
 %>
 
                 </div>
                 <div class="card-action">
-                    <a href="#">Add to Cart</a>
+                	<form method="post" action="addToCart.jsp">
+                		<input name="cart" type="submit" value="Add to Cart" onClick="this.value='Added to Cart'"/>
+                	</form>
                 </div>
             </div>
         </div>

@@ -42,6 +42,9 @@
 	<div class="collection with-header">
 		<li class="collection-header"><h4>Movies</h4></li>
 <%
+	if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
+	  response.sendRedirect("index.jsp");
+	}
     
     String file = application.getRealPath("/") + "pass.txt";
     BufferedReader br = new BufferedReader(new FileReader(file));
@@ -152,7 +155,7 @@
     			"Year ^</a>");
     	query += "order by year desc ";
     	parameters += "&sort=desc";
-    } 
+    }
     else if(Objects.equals(sort,"yearAsc")){
     	out.print("Sort: <a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
     			"A-Z v</a>  |  ");
