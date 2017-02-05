@@ -53,7 +53,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                 <!-- <li><a href="movieList.jsp">Movie List</a></li>
                 <li><a href="movie.jsp">Movie</a></li>
                 <li><a href="star.jsp">Star</a></li> -->
-                <li><a href="shoppingCart.jsp">Cart</a></li>
+                <li><a href="shoppingCart.jsp">Cart<span data-badge-caption="" class="new badge red">4</span></a></li>
 <%
                 out.println("<li><a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
 %>

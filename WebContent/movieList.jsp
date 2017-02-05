@@ -139,50 +139,46 @@
         	parameters += "&year=" + year;
         }	
     }
-    
-
-    
-    
-    
+      
     /* sorting header */
     
-    out.print("<br><br>");
+    out.print("<br><br><div align=\"center\">");
     if(Objects.equals(sort,"desc")){
-    	out.print("Sort: <a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=asc >" +
-    			"Z-A ^</a>  |  ");
-    	out.print("<a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
-    			"Year v</a>");
+    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=asc >" +
+    			"Z-A<i class=\"material-icons right\">swap_vert</i></a>    ");
+    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
+    			"Year<i class=\"material-icons right\">swap_vert</i></a>");
     	query += "order by title desc ";
     	parameters += "&sort=desc";
     } 
     else if(Objects.equals(sort,"yearDesc")){
-    	out.print("Sort: <a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
-    			"A-Z v</a>  |  ");
-    	out.print("<a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearAsc >" +
-    			"Year ^</a>");
+    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
+    			"A-Z<i class=\"material-icons right\">swap_vert</i></a>    ");
+    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearAsc >" +
+    			"Year<i class=\"material-icons right\">swap_vert</i></a>");
     	query += "order by year desc ";
     	parameters += "&sort=desc";
     }
     else if(Objects.equals(sort,"yearAsc")){
-    	out.print("Sort: <a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
-    			"A-Z v</a>  |  ");
-    	out.print("<a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
-    			"Year v</a>");
+    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
+    			"A-Z<i class=\"material-icons right\">swap_vert</i></a>    ");
+    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
+    			"Year<i class=\"material-icons right\">swap_vert</i></a>");
     	query += "order by year asc ";
     	parameters += "&sort=yearAsc";
     }
     else {
-    	out.print("Sort: <a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
-    			"A-Z v</a>  |  ");
-    	out.print("<a href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
-    			"Year v</a>");
+    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
+    			"A-Z<i class=\"material-icons right\">swap_vert</i></a>    ");
+    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
+    			"Year<i class=\"material-icons right\">swap_vert</i></a>");
     	query += "order by title asc";
     }
+    out.print("</div>");
     
     /* end sorting header */
     
-    
-    /* run query */
+        /* run query */
     // System.out.println(query);
     moviesRs = moviesSt.executeQuery(query);	
     
@@ -197,6 +193,63 @@
     
     /* end store results in arrayList */
     
+    /* pagination header */
+    
+    int lastPage = resultList.size()/10 + 1;
+    
+    out.print("<br><ul align=\"center\" class=\"pagination\">");
+    if(pageNumber == 1){ // start case 
+    	for(int i = 1; (i <= lastPage) && i < 11; i++){
+    		if(i == pageNumber){
+    			out.print("<li class=\"active\"><a href=\"#!\">1</li>");
+    		} else {
+    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
+            			"</a></li>");
+    		}
+    	}
+    	if(lastPage != 1){
+        	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber+1) + parameters + ">" +
+        			"<i class=\"material-icons\">chevron_right</i></a></li>");
+        	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(lastPage) + parameters + ">" +
+        			"<i class=\"material-icons\">fast_forward</i></a></li>");
+    	}
+    }
+    else if(pageNumber == lastPage){ // end case
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=1" + parameters + ">" +
+    			"<i class=\"material-icons\">fast_rewind</i></a></li>");
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber-1) + parameters + ">" +
+    			"<i class=\"material-icons\">chevron_left</i></a></li>");
+    	for(int i = (lastPage-11 < 1 ? 1 : lastPage-11); (i <= lastPage); i++){
+    		if(i == pageNumber){
+    			out.print("<li class=\"active\"><a href=\"#!\">"+ Integer.toString(i) +"</li>");
+    		} else {
+    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
+            			"</a></li>");
+    		}
+    	}
+    }
+    else{ // middle cases
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=1" + parameters + ">" +
+    			"<i class=\"material-icons\">fast_rewind</i></a></li>");
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber-1) + parameters + ">" +
+    			"<i class=\"material-icons\">chevron_left</i></a></li>");
+    	
+    	for(int i = (pageNumber-5 < 1 ? 1 : pageNumber-4); (i < pageNumber+6) && (i <= lastPage); i++){
+    		if(i == pageNumber){
+    			out.print("<li class=\"active\"><a href=\"#!\">"+ Integer.toString(i) +"</li>");
+    		} else {
+    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
+            			"</a></li>");
+    		}
+    	}
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber+1) + parameters + ">" +
+    			"<i class=\"material-icons\">chevron_right</i></a></li>");
+    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(lastPage) + parameters + ">" +
+    			"<i class=\"material-icons\">fast_forward</i></a></li>");
+    }
+    out.print("</ul>");
+    /* end pagination header */
+    
     /* movie results */
     
     out.print("<br><br>");
@@ -208,8 +261,6 @@
     /* end movie results */
     
     /* pagination footer */
-    
-    int lastPage = resultList.size()/10 + 1;
     
     out.print("<br><br>");
     out.print("<ul align=\"center\" class=\"pagination\">");
