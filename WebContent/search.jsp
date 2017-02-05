@@ -17,6 +17,10 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
+<!-- Dropdown Structure -->
+<ul id="dropdown1" class="dropdown-content">
+  <li><a href="/mywebapp/logout.jsp">Sign Out</a></li>
+</ul>
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper container">
@@ -24,12 +28,15 @@
                 <span class="bold">Fabflix</span>
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="active"><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
-                <li><a href="browse.jsp">Browse</a></li>
-<!--                 <li><a href="movieList.jsp">Movie List</a></li>
+                <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
+                <li class="active"><a href="browse.jsp">Browse</a></li>
+                <!-- <li><a href="movieList.jsp">Movie List</a></li>
                 <li><a href="movie.jsp">Movie</a></li>
                 <li><a href="star.jsp">Star</a></li> -->
                 <li><a href="shoppingCart.jsp">Cart</a></li>
+<%
+                out.println("<li><a class=\"dropdown-button\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+%>
             </ul>
         </div>
     </nav>

@@ -35,7 +35,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
 
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="/mywebapp">Sign Out</a></li>
+  <li><a href="/mywebapp/logout.jsp">Sign Out</a></li>
 </ul>
 <div class="navbar-fixed">
     <nav>
