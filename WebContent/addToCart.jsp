@@ -13,18 +13,19 @@
 <h1 align="center">Added to Cart</h1>
 <div align="center">
 <%
-    Map<String, Integer> cart = new HashMap<String,Integer>();
+    HashMap<String,Integer> cart = new HashMap<String,Integer>();
 	cart = (HashMap<String,Integer>)session.getAttribute("cart");
-	String item = (String)session.getAttribute("title");
+	String item = (String)session.getAttribute("id");
 	//out.println(item);
 	if (cart.containsKey(item)) {
-		cart.put(item,cart.get(item)+1);
-	} else {
-		cart.put(item,1);
-	}
+ 		cart.put(item,cart.get(item)+1);
+ 	} else {
+ 		cart.put(item,1);
+ 	}
+	response.sendRedirect("shoppingCart.jsp");
+	/*
 	out.println(item + " was added to cart" + "<br></br>");
 	session.setAttribute("cart", cart);
-	//response.sendRedirect((String)session.getAttribute("url") + "?id=" + (String)session.getAttribute("id"));
 	
 	String url = (String)session.getAttribute("url");
 	String id = (String)session.getAttribute("id");
@@ -34,6 +35,7 @@
 	out.println("<a href=" + url + "?id=" + id + ">Back to Movie</a>" + "<br></br>");
 	out.println("<a href=" + browse + ">Back to Browse</a>" + "<br></br>");
 	out.println("<a href=" + shop + ">Shopping Cart</a>");
+	*/
 %>
 
 
