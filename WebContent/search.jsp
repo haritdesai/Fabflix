@@ -46,29 +46,47 @@
   }
 %>
 <br>
-    <div class="row">
-        <div class="col s12 m6 offset-m3">
-            <div class="card white">
-                <div class="card-content black-text">
-                    <span class="card-title">Search</span>
-                    <form action="movieList.jsp" method="post">
-                    	<div class="row">
-                        	<div class="col s6"></div>Title <input type="text" name="title"></div>
-                        	<div class="col s6">Director <input type="text" name="director"></div>
-                        	<div class="col s6">Year <input type="text" name="year"></div>
-                        	<div class="col s6">Star's First Name <input type="text" name="firstName"></div>
-                        	<div class="col s6">Star's Last Name <input type="text" name="lastName"></div>
+<div class="card white">
+	<div class="card-content black-text">
+		<span class="card-title" >Search</span>
+			<div class="row">
+            	<form class ="col s12" action="movieList.jsp" method="post">
+                    <div class="row">
+                  		<div class="input-field col s12">
+          					<input id="title" type="text" class="validate">
+         					<label for="title">Title</label>
+        				</div>
+        			</div>
+        			<div class="row">
+                        <div class="input-field col s6">
+                            <input id="director" type="text" class="validate">
+         					<label for="director">Director</label>
                         </div>
-                </div>
-                <div class="card-action">
-                    <button class="btn waves-effect waves-light" type="submit" name="search" value="Search">Submit
-                      <i class="material-icons right">send</i>
-                    </button>
-                    </form>
-                </div>
+                        <div class="input-field col s6">
+                        	<input id="year" type="text" class="validate">
+         					<label for="year">Year</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6">
+                        	<input id="firstName" type="text" class="validate">
+         					<label for="firstName">Star's First Name</label>
+                        </div>
+                        <div class="input-field col s6">
+                        	<input id="lastName" type="text" class="validate">
+         					<label for="lastName">Star's Last Name</label>
+                        </div>
+                    </div>
+                	<div class="card-action">
+                    	<button class="btn waves-effect waves-light" type="submit" name="search" value="Search">Submit
+                    		<i class="material-icons right">send</i>
+                    	</button>
+                   	</div>
+                </form>
             </div>
         </div>
     </div>
 </div>
+
 </body>
 </html>

@@ -70,9 +70,12 @@
 	String sort = request.getParameter("sort");
 	String pageStr = request.getParameter("page");
 	String genre = request.getParameter("genre");
+	String resnum = request.getParameter("resnum");
 	
     int pageNumber = 1;
     if (pageStr != null) pageNumber = Integer.parseInt(pageStr);
+    
+    if(resnum == null) resnum = "10";
 	
 	Statement moviesSt = con.createStatement();
     ResultSet moviesRs;
@@ -143,10 +146,26 @@
 %>
     
 
-<div class="col s4 offset-s6">  
+<div class="col s7 offset-s6">  
+
 <%
+
+out.print("<br><div align=\"center\">");
+out.print("<div class=\"fixed-action-btn\">" +
+				"<a class=\"waves-effect waves-light btn\">" +
+  					"Res/Pg<i class=\"large material-icons right\">arrow_drop_down</i>" +
+				"</a>" +
+				"<ul>" +
+  					"<li><a href=movieList.jsp?resnum=10" + parameters + " class=\"waves-effect waves-light btn\">10</a></li>" +
+  					"<li><a href=movieList.jsp?resnum=25" + parameters + " class=\"waves-effect waves-light btn\">25</a></li>" +
+  					"<li><a href=movieList.jsp?resnum=50" + parameters + " class=\"waves-effect waves-light btn\">50</a></li>" +
+  					"<li><a href=movieList.jsp?resnum=100" + parameters + " class=\"waves-effect waves-light btn\">100</a></li>" +
+					"</ul>" + 
+			"</div>");
+
 	/* sorting header */
-    out.print("<br><div align=\"center\">");
+    
+	if (resnum != null) parameters += "&resnum=" + resnum;
     if(Objects.equals(sort,"desc")){
     	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=asc >" +
     			"Z-A<i class=\"material-icons right\">swap_vert</i></a>    ");
@@ -236,7 +255,7 @@
 <%    
     /* pagination header */
     
-    int lastPage = resultList.size()/10 + 1;
+    int lastPage = resultList.size()/Integer.parseInt(resnum) + 1;
     
     out.print("<ul class=\"pagination\">");
     if(pageNumber == 1){ // start case 
@@ -298,7 +317,7 @@
     /* movie results */
     
     out.print("<ul class=\"collapsible\" data-collapsible=\"accordion\">");
-    for(int i = (pageNumber*10 - 10); i < pageNumber*10; i++){
+    for(int i = (pageNumber*Integer.parseInt(resnum) - Integer.parseInt(resnum)); i < pageNumber*Integer.parseInt(resnum); i++){
     	if (i < resultList.size())
     		out.print(resultList.get(i));
     }
