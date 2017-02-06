@@ -54,7 +54,11 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
                 int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
                 if (quantity > 0)
                 {
-                out.println("<li class=\"active\"><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                out.println("<li><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                }
+                else
+                {
+                out.println("<li><a href=\"shoppingCart.jsp\">Cart</a></li>");
                 }
                 out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
 %>
