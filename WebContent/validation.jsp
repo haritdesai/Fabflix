@@ -18,6 +18,10 @@
 	
 	    HashMap<String,Integer> cart = new HashMap<String,Integer>();
 	    cart = (HashMap<String,Integer>)session.getAttribute("cart");
+	    String c_id = (String)session.getAttribute("userid");
+	    
+	    Date today = new Date();//Today Date 
+	    String todayFormatted = format.format(today);
 	    
 	    //change to your own password
 	    String file = application.getRealPath("/") + "pass.txt";
@@ -28,15 +32,23 @@
 	            "root", mysqlPass);
 	    Statement st = con.createStatement();
 	    ResultSet rs;
-
-    
+		
+    	out.println("bout to start querying boi");
 	    rs = st.executeQuery("select * from creditcards where id='" + ccid + "' and first_name='" + firstName + "' and last_name='" + lastName + "' and expiration='" + expiration + "'");
 	    if (rs.next() && !cart.isEmpty()) {
+	    	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
+		    	Statement ST = con.createStatement();
+		    	//out.println("insert into sales (customer_id, movie_id, sale_date) values (" + "'" + c_id + "'" + ", " + "'" + entry.getKey() +"'"+ ", " + "'"+todayFormatted+"'" + ")");
+		    	ST.executeUpdate("insert into sales (customer_id, movie_id, sale_date) values (" + "'" + c_id + "'" + ", " + "'" + entry.getKey() +"'"+ ", " + "'"+todayFormatted+"'" + ")");
+	    		out.println("query");
+	    	}
+	    	out.println("fuck");
 	        response.sendRedirect("confirmation.jsp");
 	    } else {
 	    	response.sendRedirect("invalid.jsp");
 	    }
     } catch (Exception e) {
-    	response.sendRedirect("customerInformation.jsp");
+    	//response.sendRedirect("customerInformation.jsp");
+    	out.println("YA DONE FUCKED UP BOI");
     }
 %>
