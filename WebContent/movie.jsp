@@ -1,5 +1,6 @@
 <%@ page import ="java.sql.*" %>
 <%@ page import="java.io.*" %>
+<%@ page import = "java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,9 +32,21 @@
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
                 <li class="active"><a href="browse.jsp">Browse</a></li>
-                <li><a href="shoppingCart.jsp">Cart</a></li>
 <%
-                out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                if (session.getAttribute("cart") != null)
+                {
+                    int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
+                    if (quantity > 0)
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                    }
+                    else
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart</a></li>");
+                    }
+                    out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                }
+                
 %>
             </ul>
         </div>
@@ -44,7 +57,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col s15 m">
+        <div class="col s12 m6 offset-m3">
             <div class="card horizontal">
             	<div class="card-image">
                 

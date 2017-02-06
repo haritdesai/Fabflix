@@ -1,5 +1,6 @@
 <%@ page import ="java.sql.*" %>
 <%@ page import="java.io.*" %>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -44,9 +45,21 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
                 <li><a href="browse.jsp">Browse</a></li>
-                <li class="active"><a href="shoppingCart.jsp">Cart</a></li>
 <%
-                out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                if (session.getAttribute("cart") != null)
+                {
+                    int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
+                    if (quantity > 0)
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                    }
+                    else
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart</a></li>");
+                    }
+                    out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                }
+                
 %>
             </ul>
         </div>
@@ -75,7 +88,6 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                             <div class="row">
                                 <div class="input-field col s4">
                                     <select name="month">
-                                        <option value="" disabled selected>Month</option>
                                         <%
                                         for (int i = 1; i <= 9; i++) {
                                             out.println("<option value=\"0"+i+"\">" +i+ "</option>");
@@ -89,7 +101,6 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                                 </div>
                                 <div class="input-field col s4">
                                     <select name="day">
-                                        <option value="" disabled selected>Day</option>
                                         <%
                                         for (int i = 1; i <= 9; i++) {
                                             out.println("<option value=\"0"+i+"\">" +i+ "</option>");
@@ -103,7 +114,6 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                                 </div>
                                 <div class ="input-field col s4 ">
                                     <select name="year">
-                                        <option value="" disabled selected>Year</option>
                                         <%
                                         for (int i = 0; i <= 30; i++) {
                                             out.println("<option value=\""+(2000+i)+"\">" +(2000+i)+ "</option>");
@@ -124,6 +134,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                                 </div>
                             </div>
                 <div class="card-action">
+                    <a class="waves-effect waves-light btn-flat" href="shoppingCart.jsp">Back</a>
                     <button class="btn waves-effect waves-light" type="submit" name="order" value="order">Submit Order
                       <i class="material-icons right">send</i>
                     </button>

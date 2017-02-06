@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -18,6 +19,11 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
+<%
+if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
+         response.sendRedirect("index.jsp");
+}
+%>
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
   <li><a href="/mywebapp/logout.jsp">Sign Out</a></li>
@@ -30,10 +36,22 @@
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
-                <li class="active"><a href="browse.jsp">Browse</a></li>
-                <li><a href="shoppingCart.jsp">Cart</a></li>
+                <li><a href="browse.jsp">Browse</a></li>
 <%
-                out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                if (session.getAttribute("cart") != null)
+                {
+                    int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
+                    if (quantity > 0)
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                    }
+                    else
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart</a></li>");
+                    }
+                    out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                }
+                
 %>
             </ul>
         </div>
@@ -43,12 +61,14 @@
 
 <div class="container">
     <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 m6 offset-m3">
             <div class="card white">
                 <div class="card-content black-text">
-                	<span class=\"card-title\">Confirmation Failed</span>
-                	<br>Please return to Cart
-                	<br>Cart empty or invalid credit cart information
+                	<span class="card-title">Confirmation Failed</span>
+                	<p>Cart empty or invalid credit card information</p>
+                </div>
+                <div class="card-action">
+                    <a class="waves-effect waves-light btn" href="shoppingCart.jsp">Back</a>
                 </div>
             </div>
         </div>

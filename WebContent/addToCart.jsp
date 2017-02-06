@@ -3,15 +3,7 @@
 <%@ page import = "java.util.*" %>
 <%@ page import = "java.sql.*" %>
 <%@ page import = "java.io.*" %>
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Fabflix</title>
-</head>
 
-<body BGCOLOR="#FDF5E6">
-<h1 align="center">Added to Cart</h1>
-<div align="center">
 <%
     HashMap<String,Integer> cart = new HashMap<String,Integer>();
 	cart = (HashMap<String,Integer>)session.getAttribute("cart");
@@ -37,16 +29,3 @@
 	out.println("<a href=" + shop + ">Shopping Cart</a>");
 	*/
 %>
-
-
-
-</div><br>
-<a align="center" href="search.jsp">Search</a><br>
-<a align="center" href="browse.jsp">Browse</a><br>
-<a align="center" href="movieList.jsp">Movie List</a><br>
-<a align="center" href="movie.jsp">Movie</a><br>
-<a align="center" href="star.jsp">Star</a><br>
-<a align="center" href="shoppingCart.jsp">Cart</a><br>
-
-</body>
-</html>

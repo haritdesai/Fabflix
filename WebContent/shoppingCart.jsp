@@ -50,48 +50,83 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
                 <li><a href="browse.jsp">Browse</a></li>
-                <li class="active"><a href="shoppingCart.jsp">Cart</a></li>
 <%
-                out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                if (session.getAttribute("cart") != null)
+                {
+                    int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
+                    if (quantity > 0)
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                    }
+                    else
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart</a></li>");
+                    }
+                    out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                }
+                
 %>
             </ul>
         </div>
     </nav>
 </div>
 <br>
-<form action="update.jsp" method="post">
-<table>
-        <thead>
-          <tr>
-              <th data-field="title">Title</th>
-              <th data-field="quantity">Quantity</th>
-              <th data-field="price">Item Price</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          	<% 
-          	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
-          		String query = "select * from movies ";
-          		query += "where id=" + entry.getKey();
-          		ResultSet moviesRs;
-          		Statement moviesSt = con.createStatement();
-          		moviesRs = moviesSt.executeQuery(query);
-          		out.println("<tr>");
-          		while(moviesRs.next()){
-          			out.println("<td>" + moviesRs.getString(2) + "</td>"); 
-          		}
-          		out.println("<td>" + "<input type=" + "text" + " name=" + entry.getKey() + " value=" + entry.getValue() + ">" + "</td>");
-          		out.println("<td>$5.00</td>");
-      			out.println("<tr>");
-          	}
-          	%>
-        </tbody>
-      </table>
-      <input type="submit" value="Update Quantities">
-</form>
+<div class="container">
+<div class="row">
+    <div class="col s12 m6 offset-m3">
+        <div class="card white">
+        <div class="card-content black-text">
+            <span class="card-title">Shopping Cart</span>
+            <div class="row">
+                <div class="col s12">
+                    <form action="update.jsp" method="post">
+                    <table>
+                            <thead>
+                              <tr>
+                                  <th data-field="title">Title</th>
+                                  <th data-field="quantity">Quantity</th>
+                                  <th data-field="price">Item Price</th>
+                              </tr>
+                            </thead>
 
-<a href="customerInformation.jsp">Checkout</a>
+                            <tbody>
+                                <%
+                                if (cart != null)
+                                {
+                                    for (Map.Entry<String,Integer> entry: cart.entrySet()) {
+                                        String query = "select * from movies ";
+                                        query += "where id=" + entry.getKey();
+                                        ResultSet moviesRs;
+                                        Statement moviesSt = con.createStatement();
+                                        moviesRs = moviesSt.executeQuery(query);
+                                        out.println("<tr>");
+                                        while(moviesRs.next()){
+                                            out.println("<td>" + moviesRs.getString(2) + "</td>"); 
+                                        }
+                                        out.println("<td>" + "<input type=" + "text" + " name=" + entry.getKey() + " value=" + entry.getValue() + ">" + "</td>");
+                                        out.println("<td>$5.00</td>");
+                                        out.println("<tr>");
+                                    }
+                                }
+
+                                %>
+                            </tbody>
+                          </table>
+                </div>
+            </div>
+        </div>
+            <div class="card-action">
+                <button class="waves-effect waves-light btn-flat" type="submit">Update</button>
+                <a class="waves-effect waves-light btn" href="customerInformation.jsp">Checkout</a>
+            </div>
+                </form>
+        </div>
+    </div>
+</div>
+</div>
+
+
 
 </body>
 </html>

@@ -51,9 +51,15 @@
 					<div class="row">
 						<h3 align="center">Sign In</h3>
 					<form class="col s12" action="login.jsp" method="post">
+<%
+    if(null!=request.getAttribute("errorMessage"))
+    {
+        out.println(request.getAttribute("errorMessage"));
+    }
+%>
 						<div class="row">
 							<div class="input-field col s12">
-								<input id="email" type="email" name="email">
+								<input id="email" type="email" name="email" class="validate">
 								<label for="email">Email</label>
 							</div>
 						</div>
@@ -98,7 +104,6 @@
 	<div class="footer-copyright">
 		<div class="container">
 © 2017 Copyright Text
-		<!-- <a class="grey-text text-darken-4 right" href="#!">More Links</a> -->
 		</div>
 	</div>
 </footer>	
