@@ -121,6 +121,7 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                                 </div>
                             </div>
                 <div class="card-action">
+                    <a class="waves-effect waves-light btn-flat" href="shoppingCart.jsp">Back</a>
                     <button class="btn waves-effect waves-light" type="submit" name="order" value="order">Submit Order
                       <i class="material-icons right">send</i>
                     </button>

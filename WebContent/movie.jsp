@@ -44,7 +44,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col s15 m">
+        <div class="col s12 m6 offset-m3">
             <div class="card horizontal">
             	<div class="card-image">
                 

@@ -43,12 +43,14 @@
 
 <div class="container">
     <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 m6 offset-m3">
             <div class="card white">
                 <div class="card-content black-text">
-                	<span class=\"card-title\">Confirmation Failed</span>
-                	<br>Please return to Cart
-                	<br>Cart empty or invalid credit cart information
+                	<span class="card-title">Confirmation Failed</span>
+                	<p>Cart empty or invalid credit card information</p>
+                </div>
+                <div class="card-action">
+                    <a class="waves-effect waves-light btn" href="shoppingCart.jsp">Back</a>
                 </div>
             </div>
         </div>
