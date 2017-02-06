@@ -51,16 +51,20 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
                 <li><a href="browse.jsp">Browse</a></li>
 <%
-                int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
-                if (quantity > 0)
+                if (session.getAttribute("cart") != null)
                 {
-                out.println("<li><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                    int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
+                    if (quantity > 0)
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                    }
+                    else
+                    {
+                    out.println("<li><a href=\"shoppingCart.jsp\">Cart</a></li>");
+                    }
+                    out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
                 }
-                else
-                {
-                out.println("<li><a href=\"shoppingCart.jsp\">Cart</a></li>");
-                }
-                out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
+                
 %>
             </ul>
         </div>
@@ -87,21 +91,25 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
                             </thead>
 
                             <tbody>
-                                <% 
-                                for (Map.Entry<String,Integer> entry: cart.entrySet()) {
-                                    String query = "select * from movies ";
-                                    query += "where id=" + entry.getKey();
-                                    ResultSet moviesRs;
-                                    Statement moviesSt = con.createStatement();
-                                    moviesRs = moviesSt.executeQuery(query);
-                                    out.println("<tr>");
-                                    while(moviesRs.next()){
-                                        out.println("<td>" + moviesRs.getString(2) + "</td>"); 
+                                <%
+                                if (cart != null)
+                                {
+                                    for (Map.Entry<String,Integer> entry: cart.entrySet()) {
+                                        String query = "select * from movies ";
+                                        query += "where id=" + entry.getKey();
+                                        ResultSet moviesRs;
+                                        Statement moviesSt = con.createStatement();
+                                        moviesRs = moviesSt.executeQuery(query);
+                                        out.println("<tr>");
+                                        while(moviesRs.next()){
+                                            out.println("<td>" + moviesRs.getString(2) + "</td>"); 
+                                        }
+                                        out.println("<td>" + "<input type=" + "text" + " name=" + entry.getKey() + " value=" + entry.getValue() + ">" + "</td>");
+                                        out.println("<td>$5.00</td>");
+                                        out.println("<tr>");
                                     }
-                                    out.println("<td>" + "<input type=" + "text" + " name=" + entry.getKey() + " value=" + entry.getValue() + ">" + "</td>");
-                                    out.println("<td>$5.00</td>");
-                                    out.println("<tr>");
                                 }
+
                                 %>
                             </tbody>
                           </table>
