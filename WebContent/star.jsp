@@ -86,18 +86,14 @@ while (starsRs.next()) {
 	out.print("<span class=\"card-title\">" + starsRs.getString(2) + " " + starsRs.getString(3) + "</span>");
     out.print("<br>DOB: " + starsRs.getDate(4));
     out.print("<br><img src=\"" + starsRs.getString(5) + "\" alt=\"Missing Photo\">");
-    out.print("<br>Movies: | ");
+    out.print("<br>Movies: ");
     while(moviesRs.next()){
-    	out.print("<a href=movie.jsp?id=" + moviesRs.getInt(1) + ">" + 
-    				moviesRs.getString(2) + "</a> (" + moviesRs.getInt(3) + ") | ");
+    	out.print("<a <a class=\"chip\" href=movie.jsp?id=" + moviesRs.getInt(1) + ">" + 
+    				moviesRs.getString(2) + " (" + moviesRs.getInt(3) + ")</a>");
     }
 }
 %>
 
-                </div>
-                <div class="card-action">
-                    <a href="#">This is a link</a>
-                    <a href="#">This is a link</a>
                 </div>
             </div>
         </div>
