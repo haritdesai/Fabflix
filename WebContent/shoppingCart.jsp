@@ -117,8 +117,8 @@ Class.forName("com.mysql.jdbc.Driver").newInstance();
             </div>
         </div>
             <div class="card-action">
-                <button class="waves-effect waves-light btn-flat" type="submit">Update</button>
-                <a class="waves-effect waves-light btn" href="customerInformation.jsp">Checkout</a>
+                <button class="waves-effect waves-light btn " type="submit"><i class="material-icons left">replay</i>Update</button>
+                <a class="waves-effect waves-light btn" href="customerInformation.jsp"><i class="material-icons right">shopping_cart</i>Checkout</a>
             </div>
                 </form>
         </div>
