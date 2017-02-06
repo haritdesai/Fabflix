@@ -75,7 +75,6 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                             <div class="row">
                                 <div class="input-field col s4">
                                     <select name="month">
-                                        <option value="" disabled selected>Month</option>
                                         <%
                                         for (int i = 1; i <= 9; i++) {
                                             out.println("<option value=\"0"+i+"\">" +i+ "</option>");
@@ -89,7 +88,6 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                                 </div>
                                 <div class="input-field col s4">
                                     <select name="day">
-                                        <option value="" disabled selected>Day</option>
                                         <%
                                         for (int i = 1; i <= 9; i++) {
                                             out.println("<option value=\"0"+i+"\">" +i+ "</option>");
@@ -103,7 +101,6 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
                                 </div>
                                 <div class ="input-field col s4 ">
                                     <select name="year">
-                                        <option value="" disabled selected>Year</option>
                                         <%
                                         for (int i = 0; i <= 30; i++) {
                                             out.println("<option value=\""+(2000+i)+"\">" +(2000+i)+ "</option>");

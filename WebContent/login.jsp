@@ -28,8 +28,9 @@
         session.setAttribute("lastName", rs.getString(3));
         response.sendRedirect("browse.jsp");
     } else {
-    	out.println(email);
-    	out.println(password);
-        out.println("Invalid password <a href='index.jsp'>try again</a>");
+    	session.invalidate();
+        request.setAttribute("errorMessage", "Invalid email or password");
+        RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
+        rd.forward(request, response);       
     }
 %>
