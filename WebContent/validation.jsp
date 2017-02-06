@@ -33,22 +33,18 @@
 	    Statement st = con.createStatement();
 	    ResultSet rs;
 		
-    	out.println("bout to start querying boi");
 	    rs = st.executeQuery("select * from creditcards where id='" + ccid + "' and first_name='" + firstName + "' and last_name='" + lastName + "' and expiration='" + expiration + "'");
 	    if (rs.next() && !cart.isEmpty()) {
 	    	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
 		    	Statement ST = con.createStatement();
 		    	//out.println("insert into sales (customer_id, movie_id, sale_date) values (" + "'" + c_id + "'" + ", " + "'" + entry.getKey() +"'"+ ", " + "'"+todayFormatted+"'" + ")");
 		    	ST.executeUpdate("insert into sales (customer_id, movie_id, sale_date) values (" + "'" + c_id + "'" + ", " + "'" + entry.getKey() +"'"+ ", " + "'"+todayFormatted+"'" + ")");
-	    		out.println("query");
 	    	}
-	    	out.println("fuck");
 	        response.sendRedirect("confirmation.jsp");
 	    } else {
 	    	response.sendRedirect("invalid.jsp");
 	    }
     } catch (Exception e) {
-    	//response.sendRedirect("customerInformation.jsp");
-    	out.println("YA DONE FUCKED UP BOI");
+    	response.sendRedirect("customerInformation.jsp");
     }
 %>
