@@ -66,27 +66,27 @@
             	<form class ="col s12" action="movieList.jsp" method="post">
                     <div class="row">
                   		<div class="input-field col s12">
-          					<input id="title" type="text" class="validate">
+          					<input id="title" name="title" type="text" class="validate">
          					<label for="title">Title</label>
         				</div>
         			</div>
         			<div class="row">
                         <div class="input-field col s6">
-                            <input id="director" type="text" class="validate">
+                            <input id="director" name="director" type="text" class="validate">
          					<label for="director">Director</label>
                         </div>
                         <div class="input-field col s6">
-                        	<input id="year" type="text" class="validate">
+                        	<input id="year" name="year" type="text" class="validate">
          					<label for="year">Year</label>
                         </div>
                     </div>
                     <div class="row">
                         <div class="input-field col s6">
-                        	<input id="firstName" type="text" class="validate">
+                        	<input id="firstName" name="firstName" type="text" class="validate">
          					<label for="firstName">Star's First Name</label>
                         </div>
                         <div class="input-field col s6">
-                        	<input id="lastName" type="text" class="validate">
+                        	<input id="lastName" name="lastName" type="text" class="validate">
          					<label for="lastName">Star's Last Name</label>
                         </div>
                     </div>
