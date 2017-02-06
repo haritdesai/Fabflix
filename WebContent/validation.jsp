@@ -30,9 +30,16 @@
 	
 	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
 	            "root", mysqlPass);
-	    Statement st = con.createStatement();
+	    PreparedStatement st;
 	    ResultSet rs;
-		
+
+		String queryString = "select * from creditcards where id= ? and first_name= ? and last_name= ? and expiration= ?";
+		st = con.prepareStatement(queryString);
+		st.setString(1, ccid);
+		st.setString(2, firstName);
+		st.setString(3, lastName);
+		st.setDate(4, expiration);
+
 	    rs = st.executeQuery("select * from creditcards where id='" + ccid + "' and first_name='" + firstName + "' and last_name='" + lastName + "' and expiration='" + expiration + "'");
 	    if (rs.next() && !cart.isEmpty()) {
 	    	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
@@ -47,4 +54,5 @@
     } catch (Exception e) {
     	response.sendRedirect("customerInformation.jsp");
     }
+
 %>
