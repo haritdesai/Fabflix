@@ -1,5 +1,6 @@
 <%@ page import ="java.sql.*" %>
 <%@ page import="java.io.*" %>
+<%@ page import = "java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -48,8 +49,12 @@ Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movied
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
                 <li class="active"><a href="browse.jsp">Browse</a></li>
-                <li><a href="shoppingCart.jsp">Cart<span data-badge-caption="" class="new badge teal lighten-1">4</span></a></li>
 <%
+                int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
+                if (quantity > 0)
+                {
+                out.println("<li><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                }
                 out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
 %>
             </ul>

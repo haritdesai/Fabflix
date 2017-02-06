@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,9 +31,13 @@
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
                 <li><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
-                <li class="active"><a href="browse.jsp">Browse</a></li>
-                <li><a href="shoppingCart.jsp">Cart</a></li>
+                <li><a href="browse.jsp">Browse</a></li>
 <%
+                int quantity = ((HashMap<String,Integer>)session.getAttribute("cart")).size();
+                if (quantity > 0)
+                {
+                out.println("<li class=\"active\"><a href=\"shoppingCart.jsp\">Cart<span class=\"new badge teal lighten-1\" data-badge-caption=\"\">"+quantity+"</span></a></li>");
+                }
                 out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
 %>
             </ul>
