@@ -53,8 +53,7 @@
 	    	response.sendRedirect("invalid.jsp");
 	    }
     } catch (Exception e) {
-    	out.println(st);
-    	//response.sendRedirect("customerInformation.jsp");
+    	response.sendRedirect("customerInformation.jsp");
     }
 
 %>
