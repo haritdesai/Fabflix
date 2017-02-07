@@ -1,0 +1,3 @@
+Like Predicate Usage:
+- movieList.jsp
+	- like predicate used sql queries with 'AZXY%' pattern
