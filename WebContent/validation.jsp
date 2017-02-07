@@ -4,7 +4,7 @@
 <%@ page import="java.util.Date" %>
 <%@ page import="java.util.*" %>
 <%
-	
+	try {
 	    String ccid = request.getParameter("ccid");    
 	    String firstName = request.getParameter("firstName");
 	    String lastName = request.getParameter("lastName");
@@ -27,7 +27,7 @@
 	    String file = application.getRealPath("/") + "pass.txt";
 	    BufferedReader br = new BufferedReader(new FileReader(file));
 	    String mysqlPass = br.readLine();
-	
+	    Class.forName("com.mysql.jdbc.Driver");
 	    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
 	            "root", mysqlPass);
 	    PreparedStatement st;
@@ -39,12 +39,12 @@
 		st.setString(2, firstName);
 		st.setString(3, lastName);
 		st.setDate(4, expiration);
-		try {
+		
 	    rs = st.executeQuery();
 	    if (rs.next() && !cart.isEmpty()) {
 	    	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
 		    	Statement ST = con.createStatement();
-		    	ST.executeUpdate("insert into sales (customer_id, movie_id, sales_date) values (" + "'" + c_id + "'" + ", " + "'" + entry.getKey() +"'"+ ", " + "'"+todayFormatted+"'" + ")");
+		    	ST.executeUpdate("insert into sales (customer_id, movie_id, sale_date) values (" + "'" + c_id + "'" + ", " + "'" + entry.getKey() +"'"+ ", " + "'"+todayFormatted+"'" + ")");
 	    	}
 	        response.sendRedirect("confirmation.jsp");
 	    } else {

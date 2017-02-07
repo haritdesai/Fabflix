@@ -21,14 +21,12 @@
 
 <!-- <h1 align="center">Welcome to Shitty Netflix</h1> -->
 <%
-String file = application.getRealPath("/") + "pass.txt";
-BufferedReader br = new BufferedReader(new FileReader(file));
-String mysqlPass = br.readLine();
-
-
-
-Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-        "root", mysqlPass);
+    String file = application.getRealPath("/") + "pass.txt";
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    String mysqlPass = br.readLine();
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
+            "root", mysqlPass);
 
 %>
 

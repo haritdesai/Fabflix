@@ -20,14 +20,12 @@
     <script type="text/javascript" src="js/materialize.min.js"></script>
 
 <%
-String file = application.getRealPath("/") + "pass.txt";
-BufferedReader br = new BufferedReader(new FileReader(file));
-String mysqlPass = br.readLine();
-
-Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-        "root", mysqlPass);
-
-Class.forName("com.mysql.jdbc.Driver").newInstance();
+    String file = application.getRealPath("/") + "pass.txt";
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    String mysqlPass = br.readLine();
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
+            "root", mysqlPass);
 
 	if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
 		 response.sendRedirect("index.jsp");

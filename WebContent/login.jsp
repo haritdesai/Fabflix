@@ -6,7 +6,7 @@
     String password = request.getParameter("password");
     session.setAttribute("email", email);
     session.setAttribute("password", password);
-    Class.forName("com.mysql.jdbc.Driver").newInstance();
+    Class.forName("com.mysql.jdbc.Driver");
 
     //change to your own password
     String file = application.getRealPath("/") + "pass.txt";
