@@ -40,7 +40,7 @@
 		st.setString(3, lastName);
 		st.setDate(4, expiration);
 
-	    rs = st.executeQuery("select * from creditcards where id='" + ccid + "' and first_name='" + firstName + "' and last_name='" + lastName + "' and expiration='" + expiration + "'");
+	    rs = st.executeQuery();
 	    if (rs.next() && !cart.isEmpty()) {
 	    	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
 		    	Statement ST = con.createStatement();
