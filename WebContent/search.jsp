@@ -20,12 +20,12 @@
 
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
-  <li><a href="/mywebapp/logout.jsp">Sign Out</a></li>
+  <li><a href="logout.jsp">Sign Out</a></li>
 </ul>
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper container">
-            <a href="/mywebapp/browse.jsp" class="brand-logo brand-logo-small">
+            <a href="browse.jsp" class="brand-logo brand-logo-small">
                 <span class="bold">Fabflix</span>
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
