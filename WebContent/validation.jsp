@@ -44,9 +44,7 @@
 	    if (rs.next() && !cart.isEmpty()) {
 	    	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
 		    	Statement ST = con.createStatement();
-		    	out.println("insert into sales (customer_id, movie_id, sales_date) values (" + "'" + c_id + "'" + ", " + "'" + entry.getKey() +"'"+ ", " + "'"+todayFormatted+"'" + ")");
 		    	ST.executeUpdate("insert into sales (customer_id, movie_id, sales_date) values (" + "'" + c_id + "'" + ", " + "'" + entry.getKey() +"'"+ ", " + "'"+todayFormatted+"'" + ")");
-	    		out.println("here");
 	    	}
 	        response.sendRedirect("confirmation.jsp");
 	    } else {
