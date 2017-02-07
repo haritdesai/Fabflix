@@ -12,6 +12,8 @@
 <%
 	HashMap<String,Integer> cart = new HashMap<String,Integer>();
 	cart = (HashMap<String,Integer>)session.getAttribute("cart");
+	if (cart != null)
+  	{
 	Set<String> toRemove = new HashSet<String>();
 	
 	for (Map.Entry<String,Integer> entry: cart.entrySet()) {
@@ -28,7 +30,7 @@
 	}
 	
 	cart.keySet().removeAll(toRemove);
-	
+	}
 	response.sendRedirect("shoppingCart.jsp");
 %>
 
