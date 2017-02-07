@@ -33,6 +33,9 @@
                 <li class="active"><a href="browse.jsp">Browse</a></li>
                 <li><a href="shoppingCart.jsp">Cart</a></li>
 <%
+                if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
+                    response.sendRedirect("index.jsp");
+                }
                 out.println("<li><a class=\"dropdown-button\" data-beloworigin=\"true\" href=\"#!\" data-activates=\"dropdown1\">"+session.getAttribute("firstName")+"<i class=\"material-icons right\">arrow_drop_down</i></a></li>");
 %>
             </ul>
