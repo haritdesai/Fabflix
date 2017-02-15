@@ -88,7 +88,7 @@ if (session.getAttribute("email") == null || session.getAttribute("password") ==
     
 
     while (moviesRs.next()) {
-    	out.print("<img src=" + moviesRs.getString(5) + " alt=\"Missing Photo\" style=\"width:200px;height:380px;\"></div><div class=\"card-content black-text\">");
+    	out.print("<img src=" + moviesRs.getString(5) + " alt=\"Missing Photo\" style=\"width:256px;height:480px;\"></div><div class=\"card-content black-text\">");
     	
     	out.print("<span class=\"card-title\">" + moviesRs.getString(2) + "</span>");
     	session.setAttribute("title", moviesRs.getString(2)); /*for access in addToCard.jsp*/

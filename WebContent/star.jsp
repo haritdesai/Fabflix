@@ -83,7 +83,7 @@ starsRs = starsSt.executeQuery("select * from stars where id = " + id);
 while (starsRs.next()) {
 	out.print("<span class=\"card-title\">" + starsRs.getString(2) + " " + starsRs.getString(3) + "</span>");
     out.print("<br>DOB: " + starsRs.getDate(4));
-    out.print("<br><img src=\"" + starsRs.getString(5) + "\" alt=\"Missing Photo\">");
+    out.print("<br><img src=\"" + starsRs.getString(5) + "\" style=\"width:360px;height:480px;\" alt=\"Missing Photo\">");
     out.print("<br>Movies: ");
     while(moviesRs.next()){
     	out.print("<a <a class=\"chip\" href=movie.jsp?id=" + moviesRs.getInt(1) + ">" + 
