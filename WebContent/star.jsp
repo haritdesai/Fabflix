@@ -64,15 +64,13 @@ if (session.getAttribute("email") == null || session.getAttribute("password") ==
 	  response.sendRedirect("index.jsp");
 }
 
-String file = application.getRealPath("/") + "pass.txt";
-BufferedReader br = new BufferedReader(new FileReader(file));
-String mysqlPass = br.readLine();
-
-
-
-Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-        "root", mysqlPass);
-
+    String file = application.getRealPath("/") + "pass.txt";
+    BufferedReader br = new BufferedReader(new FileReader(file));
+    String mysqlPass = br.readLine();
+    Class.forName("com.mysql.jdbc.Driver");
+    Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
+            "root", mysqlPass);
+    
 String id = request.getParameter("id");
 Statement moviesSt = con.createStatement();
 ResultSet moviesRs;
