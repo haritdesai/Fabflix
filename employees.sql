@@ -4,7 +4,7 @@ CREATE TABLE employees (
 	fullname varchar(100)
 );
 
-INSERT INTO movies VALUES(
+INSERT INTO employees VALUES(
 	'classta@email.edu', 
 	'classta',
 	'TA CS122B'
