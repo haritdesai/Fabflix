@@ -30,15 +30,13 @@
   <!-- Define servlets that are included in the example application -->
 
 
-  <servlet>
-    <servlet-name>122BP2Servlet</servlet-name>
-    <servlet-class>122BP2</servlet-class>
-  </servlet>
-
-
-  <servlet-mapping>
-    <servlet-name>122BP2Servlet</servlet-name>
-    <url-pattern>/servlet/122BP2</url-pattern>
-  </servlet-mapping>
-
+  <security-constraint>
+ <web-resource-collection>
+    <web-resource-name>HTTPSOnly</web-resource-name>
+    <url-pattern>/*</url-pattern>
+ </web-resource-collection>
+ <user-data-constraint>
+    <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+ </user-data-constraint>
+</security-constraint>
 </web-app>
