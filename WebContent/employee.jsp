@@ -35,7 +35,7 @@
 	    <nav>
 	        <div class="nav-wrapper container">
 	            <a class="brand-logo brand-logo-small">
-	                <span class="bold">Fabflix</span>
+	                <span class="bold">Fabflix (Employee)</span>
 	            </a>
 	        </div>
 	    </nav>
