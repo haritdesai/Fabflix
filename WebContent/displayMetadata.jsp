@@ -1,5 +1,9 @@
 <%@ page import ="java.sql.*" %>
 <%@ page import = "java.util.*" %>
+<%@ page import="java.io.*" %>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -36,13 +40,49 @@
         </div>
     </nav>
 </div>
-<br>
+<div class="container">
 <div class="container">
 <%
   if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
 	  response.sendRedirect("employee.jsp");
   }
+
+  String file = application.getRealPath("/") + "pass.txt";
+  BufferedReader br = new BufferedReader(new FileReader(file));
+  String mysqlPass = br.readLine();
+
+  Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
+            "root", mysqlPass);
+
+
+
+    DatabaseMetaData md;
+    try {
+        md = con.getMetaData();
+        ResultSet rs = md.getTables(null, null, "%", null);
+        
+        out.print("<br><h4>Tables:</h4><ul class=\"collapsible\" data-collapsible=\"accordion\">");
+        while (rs.next()) {
+            out.print("<li><div class=\"collapsible-header\"><h5>" + rs.getString(3) + "</h5></div>");
+            out.print("<div class=\"collapsible-body\"><div class=\"container\"><table class=\"centered striped\"><thead><tr>");
+            out.print("<th>COLUMN NAME</th><th>COLUMN TYPE</th>");
+            out.print("</tr></thead><tbody>");
+            
+            ResultSet rsColumns = md.getColumns(null, null, rs.getString(3), null);
+            while (rsColumns.next()) {
+                out.print("<tr><td>" + rsColumns.getString("COLUMN_NAME") + "</td><td>" + rsColumns.getString("TYPE_NAME") + "</td></tr>");
+            }
+            out.print("</tbody></table></div></div></li>");
+        }
+        out.print("</ul>");
+    } catch (SQLException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
 %>
+</div>
+</div>
+
 
 </body>
 </html>
