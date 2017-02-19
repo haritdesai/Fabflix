@@ -24,6 +24,7 @@
 	      height: 1000px;
 	    }
 	</style>
+	<script src='https://www.google.com/recaptcha/api.js'></script>
 </head>
 
 <body>
@@ -34,12 +35,9 @@
 	<div class="navbar-fixed">
 	    <nav>
 	        <div class="nav-wrapper container">
-	            <a class="brand-logo brand-logo-small">
+	            <a href="/mywebapp/" class="brand-logo brand-logo-small">
 	                <span class="bold">Fabflix</span>
 	            </a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-	                <li><a href="employee.jsp">Employee Sign In</a></li>
-	            </ul>
 	        </div>
 	    </nav>
 	</div>
@@ -75,6 +73,7 @@
 				        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
 						    <i class="material-icons right">send</i>
 						</button>
+						<div class="g-recaptcha" data-sitekey="6Ldx5hUUAAAAAPieegSN37jONS5Eh8H181utdYY1"></div>
 					</form>
 					</div>
 				</div>
