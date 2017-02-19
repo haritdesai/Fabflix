@@ -37,6 +37,9 @@
 	            <a class="brand-logo brand-logo-small">
 	                <span class="bold">Fabflix (Employee)</span>
 	            </a>
+	            <ul id="nav-mobile" class="right hide-on-med-and-down">
+	                <li><a href="index.jsp">Customer Sign In</a></li>
+	            </ul>
 	        </div>
 	    </nav>
 	</div>
