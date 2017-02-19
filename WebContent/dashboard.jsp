@@ -12,6 +12,17 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Dashboard</title>
+    <style>
+        body {
+            background-image: url("images/dashboard.jpg");
+        }
+        .my-container {
+            padding-top: 250px;
+        }
+        .parallax-container {
+          height: 1000px;
+        }
+    </style>
 </head>
 <body>
     <!--Import jQuery before materialize.js-->
@@ -25,7 +36,7 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper container">
-            <a href="browse.jsp" class="brand-logo brand-logo-small">
+            <a href="dashboard.jsp" class="brand-logo brand-logo-small">
                 <span class="bold">Fabflix (Employee) - Dashboard</span>
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
@@ -45,4 +56,10 @@
 %>
 
 </body>
+
+<script>
+    $(document).ready(function(){
+      $('.parallax').parallax();
+    });
+</script>
 </html>

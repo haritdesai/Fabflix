@@ -25,7 +25,7 @@
 <div class="navbar-fixed">
     <nav>
         <div class="nav-wrapper container">
-            <a href="browse.jsp" class="brand-logo brand-logo-small">
+            <a href="dashboard.jsp" class="brand-logo brand-logo-small">
                 <span class="bold">Fabflix (Employee) - Dashboard</span>
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
