@@ -15,7 +15,7 @@
 	<title>Login</title>
 	<style>
 		body {
-			/*background-image: url("images/movies.jpg");*/
+			background-image: url("images/movies.jpg");
 		}
 		.my-container {
 			padding-top: 250px;

@@ -32,7 +32,7 @@
                 <li class="active"><a href="insertStar.jsp">Insert Star</a></li>
                 <li><a href="insertMovie.jsp">Insert Movie</a></li>
                 <li><a href="displayMetadata.jsp">Display Metadata</a></li>
-                <li><a href="employee.jsp">Sign Out</a></li>
+                <li><a href="employeeLogout.jsp">Sign Out</a></li>
             </ul>
         </div>
     </nav>
