@@ -65,15 +65,22 @@
         out.print("<br><h4>Tables:</h4><ul class=\"collapsible\" data-collapsible=\"accordion\">");
         while (rs.next()) {
             out.print("<li><div class=\"collapsible-header\"><h5>" + rs.getString(3) + "</h5></div>");
-            out.print("<div class=\"collapsible-body\"><div class=\"container\"><table class=\"centered striped\"><thead><tr>");
-            out.print("<th>COLUMN NAME</th><th>COLUMN TYPE</th>");
+            out.print("<div class=\"collapsible-body\"><table class=\"centered striped\"><thead><tr>");
+            out.print("<th>Field</th><th>Type</th><th>Null</th><th>Key</th><th>Default</th><th>Extra</th>");
             out.print("</tr></thead><tbody>");
-            
+
+            Statement tableSt = con.createStatement();
+            ResultSet tableRs;
+            tableRs = tableSt.executeQuery("DESCRIBE " + rs.getString(3));
+
             ResultSet rsColumns = md.getColumns(null, null, rs.getString(3), null);
-            while (rsColumns.next()) {
-                out.print("<tr><td>" + rsColumns.getString("COLUMN_NAME") + "</td><td>" + rsColumns.getString("TYPE_NAME") + "</td></tr>");
+
+            while (tableRs.next()) {
+                out.print("<tr><td>" + tableRs.getString(1) + "</td><td>" + tableRs.getString(2) + "</td>");
+                out.print("<td>" + tableRs.getString(3) + "</td><td>" + tableRs.getString(4) + "</td>");
+                out.print("<td>" + tableRs.getString(5) + "</td><td>" + tableRs.getString(6) + "</td></tr>");
             }
-            out.print("</tbody></table></div></div></li>");
+            out.print("</tbody></table></div></li>");
         }
         out.print("</ul>");
     } catch (SQLException e) {
