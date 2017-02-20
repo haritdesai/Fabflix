@@ -40,8 +40,8 @@
                 <span class="bold">Fabflix - Dashboard</span>
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="active"><a href="insertStar.jsp">Insert Star</a></li>
-                <li><a href="insertMovie.jsp">Insert Movie</a></li>
+                <li><a href="insertStar.jsp">Insert Star</a></li>
+                <li class="active"><a href="insertMovie.jsp">Insert Movie</a></li>
                 <li><a href="displayMetadata.jsp">Display Metadata</a></li>
                 <li><a href="employeeLogout.jsp">Sign Out</a></li>
             </ul>
