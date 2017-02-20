@@ -36,17 +36,40 @@
 	    	response.sendRedirect("insertStar.jsp");
 	    }
 
-
-		String sqlQuery = "INSERT INTO stars (first_name, last_name, dob, photo_url) VALUES (?, ?, ?, ?)";
+	    String sqlQuery = "select * from stars where first_name = ? and last_name = ?";
+	    preparedStmt = con.prepareStatement(sqlQuery);
+        preparedStmt.setString(1, firstName);
+        preparedStmt.setString(2, lastName);
+        rs = preparedStmt.executeQuery();
+        out.println(0);
+        if (rs.next()) {
+        	sqlQuery = "update stars set dob = ? , photo_url = ? where id = ?";
+        	preparedStmt = con.prepareStatement(sqlQuery);
+            preparedStmt.setDate(1, dob);
+            if (!photo_url.isEmpty()) {
+            	preparedStmt.setString(2, photo_url);
+            }
+            else {
+            	preparedStmt.setString(2, rs.getString(5));
+            }
+            preparedStmt.setInt(3, rs.getInt(1));
+            preparedStmt.execute();
+            out.println(1);
+        }
+        else {
+        	sqlQuery = "INSERT INTO stars (first_name, last_name, dob, photo_url) VALUES (?, ?, ?, ?)";
             preparedStmt = con.prepareStatement(sqlQuery);
             preparedStmt.setString(1, firstName);
             preparedStmt.setString(2, lastName);
             preparedStmt.setDate(3, dob);
             preparedStmt.setString(4,photo_url);
             preparedStmt.execute();
+            out.println(2);
+        }
+		
+	response.sendRedirect("insertConfirmation.jsp");
     } catch (SQLException e) {
         // TODO Auto-generated catch block
-        e.printStackTrace();
-        response.sendRedirect("employee.jsp");
+        out.print(e.getMessage());
     }
 %>
