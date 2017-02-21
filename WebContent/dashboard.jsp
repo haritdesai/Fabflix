@@ -15,12 +15,7 @@
     <style>
         body {
             background-image: url("images/dashboard.jpg");
-        }
-        .my-container {
-            padding-top: 250px;
-        }
-        .parallax-container {
-          height: 1000px;
+            background-size: 100% auto;
         }
     </style>
 </head>
@@ -57,10 +52,4 @@
 %>
 
 </body>
-
-<script>
-    $(document).ready(function(){
-      $('.parallax').parallax();
-    });
-</script>
 </html>
