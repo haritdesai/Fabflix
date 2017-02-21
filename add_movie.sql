@@ -1,5 +1,3 @@
-USE moviedb;
-
 DELIMITER $$
 
 CREATE PROCEDURE add_movie(IN movie_title VARCHAR(100), IN movie_year INT, IN movie_director VARCHAR(100), 
