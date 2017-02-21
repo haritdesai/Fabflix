@@ -1,5 +1,3 @@
-USE moviedb;
-
 DELIMITER $$
 
 CREATE PROCEDURE add_movie(IN movie_title VARCHAR(100), IN movie_year INT, IN movie_director VARCHAR(100), 
@@ -15,7 +13,7 @@ BEGIN
 	DECLARE in_stars_in_movies INT DEFAULT 0;
 	DECLARE in_genres_in_movies INT DEFAULT 0;
 
-	DECLATE _movie_id INT;
+	DECLARE _movie_id INT;
 	DECLARE _star_id INT;
 	DECLARE _genre_id INT;
 
