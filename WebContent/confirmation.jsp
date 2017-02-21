@@ -46,7 +46,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 m6 offset-m3">
             <div class="card white">
                 <div class="card-content black-text">
                 	<span class=\"card-title\">Order Confirmed!</span>
