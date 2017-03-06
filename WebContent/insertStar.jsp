@@ -23,6 +23,7 @@
     String file = application.getRealPath("/") + "pass.txt";
     BufferedReader br = new BufferedReader(new FileReader(file));
     String mysqlPass = br.readLine();
+    br.close();
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
             "root", mysqlPass);

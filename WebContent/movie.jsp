@@ -58,7 +58,7 @@
 <div class="container">
     <div class="row">
         <div class="col s12 m8 offset-m2">
-            <div class="card horizontal">
+            <div class="card horizontal" style="border-radius: 32px; background: gainsboro;">
             	<div class="card-image">
                 
 <%  
@@ -69,6 +69,7 @@ if (session.getAttribute("email") == null || session.getAttribute("password") ==
     String file = application.getRealPath("/") + "pass.txt";
     BufferedReader br = new BufferedReader(new FileReader(file));
     String mysqlPass = br.readLine();
+    br.close();
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
             "root", mysqlPass);
@@ -88,21 +89,21 @@ if (session.getAttribute("email") == null || session.getAttribute("password") ==
     
 
     while (moviesRs.next()) {
-    	out.print("<img src=" + moviesRs.getString(5) + " alt=\"Missing Photo\" style=\"width:256px;height:480px;\"></div><div class=\"card-content black-text\">");
+    	out.print("<img src=" + moviesRs.getString(5) + " alt=\"Missing Photo\" style=\"width:333px;height:500px; border-radius: 32px;\"></div><div class=\"card-content black-text\">");
     	
     	out.print("<span class=\"card-title\">" + moviesRs.getString(2) + "</span>");
     	session.setAttribute("title", moviesRs.getString(2)); /*for access in addToCard.jsp*/
     	session.setAttribute("url", request.getRequestURL().toString());
     	session.setAttribute("id", id);
-    	out.print("<br>ID: " + moviesRs.getInt(1));
-        out.print("<br>Year: " + moviesRs.getInt(3));
-        out.print("<br>Director: " + moviesRs.getString(4));
-        out.print("<br>Stars: ");
+    	out.print("<br><br>ID: " + moviesRs.getInt(1));
+        out.print("<br><br>Year: " + moviesRs.getInt(3));
+        out.print("<br><br>Director: " + moviesRs.getString(4));
+        out.print("<br><br>Stars: ");
         while(starsRs.next()){
         	out.print("<a class=\"chip\" href=star.jsp?id=" + starsRs.getInt(1) + ">" + 
         			starsRs.getString(2) + " " + starsRs.getString(3) + "</a>");
         }
-        out.print("<br>Genres: ");
+        out.print("<br><br>Genres: ");
         while(genreRs.next()){
         	out.print("<a class=\"chip\" href=movieList.jsp?genre=" + genreRs.getInt(1) + ">" + 
         			genreRs.getString(2) + "</a>");

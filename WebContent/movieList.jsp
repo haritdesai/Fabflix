@@ -25,9 +25,12 @@
 <style>
 /* Tooltip container */
 .modal{
-    width: 20%;
-    color: black;
+    max-width: 30%;
+    color: rgba(0,0,0,0.6);
     text-align: center;
+    max-height: 90%;
+    background: #e4e4e4;
+    border-radius: 32px;
 }
 
 }
@@ -84,6 +87,7 @@
     String file = application.getRealPath("/") + "pass.txt";
     BufferedReader br = new BufferedReader(new FileReader(file));
     String mysqlPass = br.readLine();
+    br.close();
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
             "root", mysqlPass);
@@ -175,11 +179,9 @@
 %>
     
 
-<div class="col s7 offset-s6">  
+<div class="col s9 offset-s3">  
 
 <%
-
-out.print("<br><div align=\"center\">");
 out.print("<div class=\"fixed-action-btn\">" +
 				"<a class=\"waves-effect waves-light btn\">" +
   					"Res/Pg<i class=\"large material-icons right\">arrow_drop_down</i>" +
@@ -191,187 +193,129 @@ out.print("<div class=\"fixed-action-btn\">" +
   					"<li><a href=movieList.jsp?resnum=100" + parameters + " class=\"waves-effect waves-light btn\">100</a></li>" +
 					"</ul>" + 
 			"</div>");
-
-	/* sorting header */
-    
-	if (resnum != null) parameters += "&resnum=" + resnum;
-    if(Objects.equals(sort,"desc")){
-    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=asc >" +
-    			"Z-A<i class=\"material-icons right\">swap_vert</i></a>    ");
-    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
-    			"Year<i class=\"material-icons right\">swap_vert</i></a>");
-    	query += "order by title desc ";
-    	parameters += "&sort=desc";
-    } 
-    else if(Objects.equals(sort,"yearDesc")){
-    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
-    			"A-Z<i class=\"material-icons right\">swap_vert</i></a>    ");
-    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearAsc >" +
-    			"Year<i class=\"material-icons right\">swap_vert</i></a>");
-    	query += "order by year desc ";
-    	parameters += "&sort=desc";
-    }
-    else if(Objects.equals(sort,"yearAsc")){
-    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
-    			"A-Z<i class=\"material-icons right\">swap_vert</i></a>    ");
-    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
-    			"Year<i class=\"material-icons right\">swap_vert</i></a>");
-    	query += "order by year asc ";
-    	parameters += "&sort=yearAsc";
-    }
-    else {
-    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=desc >" +
-    			"A-Z<i class=\"material-icons right\">swap_vert</i></a>    ");
-    	out.print("<a class=\"waves-effect waves-light btn\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + "&sort=yearDesc >" +
-    			"Year<i class=\"material-icons right\">swap_vert</i></a>");
-    	query += "order by title asc";
-    }
-    out.print("</div>");
-    /* end sorting header */
 %>
 </div>
 </div>
+<table class ="bordered striped">
+    <thead>
+        <tr>
+            <th>id</th>
+            <th style="width:250px;">
+                <%
+                    String titleHref = "";
+                    String yearHref = "";
 
-<%
-    
-    
-        /* run query */
-    // System.out.println(query);
-    moviesRs = moviesSt.executeQuery(query);	
-    
-    
-    
-    
-  	
-    /* store results in arrayList */
-    
-   
-    
-    ArrayList<String> resultList = new ArrayList<String>();
+                    if (resnum != null) parameters += "&resnum=" + resnum;
 
-    int mCounter = 0;
+                    if(Objects.equals(sort,"desc")){
+                        titleHref = "&sort=asc >";
+                        yearHref = "&sort=yearDesc >";
+                    } 
+                    else if(Objects.equals(sort,"yearDesc")){
+                        titleHref = "&sort=desc >";
+                        yearHref = "&sort=yearAsc >";
+                    }
+                    else if(Objects.equals(sort,"yearAsc")){
+                        titleHref = "&sort=desc >";
+                        yearHref = "&sort=yearDesc >";
+                    }
+                    else {
+                        titleHref = "&sort=desc >";
+                        yearHref = "&sort=yearDesc >";
+                    }
 
-    while(moviesRs.next()){
-   		Statement starsSt = con.createStatement();
-   		ResultSet starsRs;
-   	    starsRs = starsSt.executeQuery("select * from stars, stars_in_movies where movie_id = " + moviesRs.getInt(1) + " and star_id = id");
-    	    
-   	    Statement genreSt = con.createStatement();
- 	    ResultSet genreRs;
-        genreRs = genreSt.executeQuery("select * from genres, genres_in_movies where movie_id = " + moviesRs.getInt(1) + " and genre_id = id");
-    	    
-    	
-    	String temp = "ID: " + moviesRs.getInt(1) + "<br>Year: " + moviesRs.getInt(3) +
-    			"<br>Director: " + moviesRs.getString(4) + "<br>Stars: ";
-        while(starsRs.next()){
-        	temp += "<a class=\"chip\" href=star.jsp?id=" + starsRs.getInt(1) + ">" + 
-        			starsRs.getString(2) + " " + starsRs.getString(3) + "</a>";
-        }
-        temp += "<br>Genres: ";
-        while(genreRs.next()){
-        	temp += "<a class=\"chip\" href=movieList.jsp?genre=" + genreRs.getInt(1) + ">" + 
-        			genreRs.getString(2) + "</a>";
-        }
-        
-    	resultList.add("<li class=\"collection-item\">" +
-                            "<div>" +
-                                "<a href=\"#modal"+mCounter+"\">" + moviesRs.getString(2) + "</a>" +
-                                "<div class=\"popUp\" id=\"" + moviesRs.getInt(1) + "\">" +
-                                    "<div id=\"modal" + mCounter + "\" class=\"modal\">" +
-                                        "<div class=\"modal-content\"></div>" +
-                                    "</div>" +
-                                "</div>" +
-                                "<a href=movie.jsp?id=" + moviesRs.getInt(1) + " class=\"secondary-content\">" +
-                                    "<i class=\"material-icons\">movies</i>" +
-                                "</a>" +
-                            "</div>" +
-                        "</li>");
+                    out.print(      "<a class=\"chip\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + titleHref + "title</a>" +
+                                "</th>" + 
+                                "<th style=\"width:100px;\">" +
+                                    "<a class=\"chip\" href=movieList.jsp?page=" + Integer.toString(pageNumber) + parameters + yearHref + "year</a>");
 
-        mCounter++;
-    }
+                    if(Objects.equals(sort,"desc")){
+                        query += "order by title desc ";
+                        parameters += "&sort=desc";
+                    } 
+                    else if(Objects.equals(sort,"yearDesc")){
+                        query += "order by year desc ";
+                        parameters += "&sort=desc";
+                    }
+                    else if(Objects.equals(sort,"yearAsc")){
+                        query += "order by year asc ";
+                        parameters += "&sort=yearAsc";
+                    }
+                    else {
+                        query += "order by title asc";
+                    }
+                %>
+            </th>
+            <th>director</th>
+            <th>genres</th>
+            <th>stars</th>
+        </tr>
+    </thead>
+    <tbody>  
+        <%  
+            /* run query */
+            moviesRs = moviesSt.executeQuery(query);	
 
-    /* end store results in arrayList */
-%>   
+          	
+            /* store results in arrayList */
+            ArrayList<String> resultList = new ArrayList<String>();
 
-<div class="row">
-	<div align="center" class="col s12"> 
-<%    
-    /* pagination header */
-    
-    int lastPage = resultList.size()/Integer.parseInt(resnum) + 1;
-    
-    out.print("<ul class=\"pagination\">");
-    if(pageNumber == 1){ // start case 
-    	for(int i = 1; (i <= lastPage) && i < 11; i++){
-    		if(i == pageNumber){
-    			out.print("<li class=\"active\"><a href=\"#!\">1</li>");
-    		} else {
-    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
-            			"</a></li>");
-    		}
-    	}
-    	if(lastPage != 1){
-        	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber+1) + parameters + ">" +
-        			"<i class=\"material-icons\">chevron_right</i></a></li>");
-        	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(lastPage) + parameters + ">" +
-        			"<i class=\"material-icons\">fast_forward</i></a></li>");
-    	}
-    }
-    else if(pageNumber == lastPage){ // end case
-    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=1" + parameters + ">" +
-    			"<i class=\"material-icons\">fast_rewind</i></a></li>");
-    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber-1) + parameters + ">" +
-    			"<i class=\"material-icons\">chevron_left</i></a></li>");
-    	for(int i = (lastPage-11 < 1 ? 1 : lastPage-11); (i <= lastPage); i++){
-    		if(i == pageNumber){
-    			out.print("<li class=\"active\"><a href=\"#!\">"+ Integer.toString(i) +"</li>");
-    		} else {
-    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
-            			"</a></li>");
-    		}
-    	}
-    }
-    else{ // middle cases
-    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=1" + parameters + ">" +
-    			"<i class=\"material-icons\">fast_rewind</i></a></li>");
-    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber-1) + parameters + ">" +
-    			"<i class=\"material-icons\">chevron_left</i></a></li>");
-    	
-    	for(int i = (pageNumber-5 < 1 ? 1 : pageNumber-4); (i < pageNumber+6) && (i <= lastPage); i++){
-    		if(i == pageNumber){
-    			out.print("<li class=\"active\"><a href=\"#!\">"+ Integer.toString(i) +"</li>");
-    		} else {
-    			out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(i) + parameters + ">" + Integer.toString(i) +
-            			"</a></li>");
-    		}
-    	}
-    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(pageNumber+1) + parameters + ">" +
-    			"<i class=\"material-icons\">chevron_right</i></a></li>");
-    	out.print("<li class=\"waves-effect\"><a href=movieList.jsp?page=" + Integer.toString(lastPage) + parameters + ">" +
-    			"<i class=\"material-icons\">fast_forward</i></a></li>");
-    }
-    out.print("</ul>");
-    /* end pagination header */
-    
-%>
-	</div>
-</div>
+            int mCounter = 0;
 
+            while(moviesRs.next()){
+           		Statement starsSt = con.createStatement();
+           		ResultSet starsRs;
+           	    starsRs = starsSt.executeQuery("select * from stars, stars_in_movies where movie_id = " + moviesRs.getInt(1) + " and star_id = id");
+            	    
+           	    Statement genreSt = con.createStatement();
+         	    ResultSet genreRs;
+                genreRs = genreSt.executeQuery("select * from genres, genres_in_movies where movie_id = " + moviesRs.getInt(1) + " and genre_id = id");
+            	    
+            	
+            	String genreList = "";
+                String starList = "";
 
+                while(starsRs.next()){
+                	starList += "<a class=\"chip\" href=star.jsp?id=" + starsRs.getInt(1) + ">" + starsRs.getString(2) + " " + starsRs.getString(3) + "  </a>";
+                }
+                
+                while(genreRs.next()){
+                	genreList += "<a class=\"chip\" href=movieList.jsp?genre=" + genreRs.getInt(1) + ">" + genreRs.getString(2) + "  </a>";
+                }
+                
+            	resultList.add( "<tr>" + 
+                                    "<th>" + 
+                                        "<a class=\"chip\" href=\"#modal"+mCounter+"\">" + moviesRs.getInt(1) + "</a>" +
+                                        "<div class=\"popUp\" id=\"" + moviesRs.getInt(1) + "\">" +
+                                            "<div id=\"modal" + mCounter + "\" class=\"modal\">" +
+                                                "<div class=\"modal-content\"></div>" +
+                                            "</div>" +
+                                        "</div>" + 
+                                    "</th>" +
+                                    "<th><a class=\"chip\" href=\"movie.jsp?id=" + moviesRs.getInt(1) + "\">" +  moviesRs.getString(2) + "</a></th>" +
+                                    "<th>" +  moviesRs.getInt(3) + "</th>" +
+                                    "<th>" +  moviesRs.getString(4) + "</th>" +
+                                    "<th>" +  genreList + "</th>" +
+                                    "<th>" +  starList + "</th>" +
+                                "</tr>");
 
-<%
-    /* movie results */
-    
-    out.print("<ul class=\"collection\">");
-    for(int i = (pageNumber*Integer.parseInt(resnum) - Integer.parseInt(resnum)); i < pageNumber*Integer.parseInt(resnum); i++){
-    	if (i < resultList.size())
-    		out.print(resultList.get(i));
-    }
-    out.print("</ul>");
-    
-    /* end movie results */
-    
-%>
+                mCounter++;
+            }
+
+            int lastPage = resultList.size()/Integer.parseInt(resnum) + 1;
+            /* end store results in arrayList */
+
+            /* movie results */
+            
+            for(int i = (pageNumber*Integer.parseInt(resnum) - Integer.parseInt(resnum)); i < pageNumber*Integer.parseInt(resnum); i++){
+            	if (i < resultList.size())
+            		out.print(resultList.get(i));
+            }
+            
+            /* end movie results */
+        %>
+    </tbody>
+</table>
 
 <div class="row">
 	<div align="center" class="col s12"> 
@@ -445,7 +389,7 @@ out.print("<div class=\"fixed-action-btn\">" +
                     var dataArr = data.split("^");
                     var starArr = dataArr[4].split("$");
 
-                    $(".popUp .modal-content").append(dataArr[1] + "(" + dataArr[2] + ")<br><img src=\"" + dataArr[3] + "\" style=\"width:160px;height:300px;\"><br>Staring:<br>");
+                    $(".popUp .modal-content").append("<h5>" + dataArr[1] + " (" + dataArr[2] + ")</h5><br><img src=\"" + dataArr[3] + "\" style=\"width:333px;height:500px;\"><br>Staring:<br>");
                     
                     for(var i = 0; i < starArr.length; i++){
                         if(i == starArr.length-1)
@@ -455,7 +399,7 @@ out.print("<div class=\"fixed-action-btn\">" +
                     }
 
 
-                    $(".popUp .modal-content").append("<a class=\"waves-effect waves-light btn\" href=\"addToCart.jsp?id=" +  dataArr[0] + "\">Add to Cart<i class=\"material-icons right\">shopping_cart</i></a>");
+                    $(".popUp .modal-content").append("<br><a class=\"waves-effect waves-light btn\" href=\"addToCart.jsp?id=" +  dataArr[0] + "\">Add to Cart<i class=\"material-icons right\">shopping_cart</i></a>");
                 });
             },
             complete: function(){

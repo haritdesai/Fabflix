@@ -12,6 +12,8 @@
     String file = application.getRealPath("/") + "pass.txt";
     BufferedReader br = new BufferedReader(new FileReader(file));
     String mysqlPass = br.readLine();
+    br.close();
+
 
     /*	For use in shopping cart	*/
 	HashMap<String,Integer> cart = new HashMap<String,Integer>();
