@@ -20,7 +20,7 @@
 	session.setAttribute("cart", cart);
 
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-            "root", mysqlPass);
+            "testuser", "testpass");
     Statement st = con.createStatement();
     ResultSet rs;
     rs = st.executeQuery("select * from employees where email='" + email + "' and password='" + password + "'");

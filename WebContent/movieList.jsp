@@ -90,7 +90,7 @@
     br.close();
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-            "root", mysqlPass);
+            "testuser", "testpass");
 
     
     String title = request.getParameter("title");

@@ -1,0 +1,21 @@
+To run xmlParser:
+
+-Have "mains243.xml" and "casts124.xml" in same folder as xmlParse.jar
+-run with command: java -jar xmlParse.jar
+
+
+For this project, we used two optimization technqiues. 
+
+The first was to store the parsed xml data in a HashMap, which removes duplicates. This makes it easier
+for MySql insertions as there is a much lower possibility of doing redundant insertions or updates. A HashMap
+also removes time complexity on our end as we do not have to do the value comparison ourselves, like if we 
+used an ArrayList instead, where we would have to manually loop through the arrays to find the duplicate 
+values and remove them. 
+
+The second was to use Batch Insert for updating the entries in our database tables. 
+Using batch insert allows use to do many insertions simultaneously, reducing input time for the data.
+Since many insertions can be done within one commit/transaction, the database does not need to be accessed 
+n times for n number of data. This reduces the time complexity of insertions greatly. 
+More so, the insertion query doesnot need to be reparsed for each item to be inserted. 
+
+Runtimes for the Insertions: 
