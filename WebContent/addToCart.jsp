@@ -8,6 +8,8 @@
     HashMap<String,Integer> cart = new HashMap<String,Integer>();
 	cart = (HashMap<String,Integer>)session.getAttribute("cart");
 	String item = (String)session.getAttribute("id");
+	if(item != null || item != "")
+		item = request.getParameter("id");
 	//out.println(item);
 	if (cart.containsKey(item)) {
  		cart.put(item,cart.get(item)+1);

@@ -14,11 +14,26 @@
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Fabflix</title>
+
+    
 </head>
 <body>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+
+<style>
+/* Tooltip container */
+.modal{
+    width: 20%;
+    color: black;
+    text-align: center;
+}
+
+}
+</style>
+
+
 
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
@@ -83,6 +98,8 @@
 	String pageStr = request.getParameter("page");
 	String genre = request.getParameter("genre");
 	String resnum = request.getParameter("resnum");
+
+    if(title == null || title =="") title =request.getParameter("searchField");
 	
     int pageNumber = 1;
     if (pageStr != null) pageNumber = Integer.parseInt(pageStr);
@@ -231,6 +248,9 @@ out.print("<div class=\"fixed-action-btn\">" +
    
     
     ArrayList<String> resultList = new ArrayList<String>();
+
+    int mCounter = 0;
+
     while(moviesRs.next()){
    		Statement starsSt = con.createStatement();
    		ResultSet starsRs;
@@ -253,10 +273,21 @@ out.print("<div class=\"fixed-action-btn\">" +
         			genreRs.getString(2) + "</a>";
         }
         
-    	resultList.add("<li><div class=\"collapsible-header\">"+ moviesRs.getString(2)
-        + "<a href=movie.jsp?id=" + moviesRs.getInt(1) + 
-        " class=\"secondary-content\"><i class=\"material-icons\">movies</i></a></div>" +
-        "<div class=\"collapsible-body\"><span>" + temp + "</span></div>");
+    	resultList.add("<li class=\"collection-item\">" +
+                            "<div>" +
+                                "<a href=\"#modal"+mCounter+"\">" + moviesRs.getString(2) + "</a>" +
+                                "<div class=\"popUp\" id=\"" + moviesRs.getInt(1) + "\">" +
+                                    "<div id=\"modal" + mCounter + "\" class=\"modal\">" +
+                                        "<div class=\"modal-content\"></div>" +
+                                    "</div>" +
+                                "</div>" +
+                                "<a href=movie.jsp?id=" + moviesRs.getInt(1) + " class=\"secondary-content\">" +
+                                    "<i class=\"material-icons\">movies</i>" +
+                                "</a>" +
+                            "</div>" +
+                        "</li>");
+
+        mCounter++;
     }
 
     /* end store results in arrayList */
@@ -325,10 +356,13 @@ out.print("<div class=\"fixed-action-btn\">" +
 %>
 	</div>
 </div>
+
+
+
 <%
     /* movie results */
     
-    out.print("<ul class=\"collapsible\" data-collapsible=\"accordion\">");
+    out.print("<ul class=\"collection\">");
     for(int i = (pageNumber*Integer.parseInt(resnum) - Integer.parseInt(resnum)); i < pageNumber*Integer.parseInt(resnum); i++){
     	if (i < resultList.size())
     		out.print(resultList.get(i));
@@ -402,5 +436,37 @@ out.print("<div class=\"fixed-action-btn\">" +
 </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".modal").modal({
+            ready: function(){
+                $.post("fetchMovie.jsp", {"movieId": $(this).parent().attr("id")}, function(data, status){
+                    var dataArr = data.split("^");
+                    var starArr = dataArr[4].split("$");
+
+                    $(".popUp .modal-content").append(dataArr[1] + "(" + dataArr[2] + ")<br><img src=\"" + dataArr[3] + "\" style=\"width:160px;height:300px;\"><br>Staring:<br>");
+                    
+                    for(var i = 0; i < starArr.length; i++){
+                        if(i == starArr.length-1)
+                            $(".popUp .modal-content").append(starArr[i]);
+                        else
+                            $(".popUp .modal-content").append(starArr[i] + "<br>");  
+                    }
+
+
+                    $(".popUp .modal-content").append("<a class=\"waves-effect waves-light btn\" href=\"addToCart.jsp?id=" +  dataArr[0] + "\">Add to Cart<i class=\"material-icons right\">shopping_cart</i></a>");
+                });
+            },
+            complete: function(){
+                $(".popUp .modal-content").empty();
+            }
+        });
+    });
+
+</script>
+
 </body>
+
+
 </html>

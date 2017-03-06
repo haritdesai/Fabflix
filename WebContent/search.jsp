@@ -11,12 +11,32 @@
     <link type="text/css" rel="stylesheet" href="css/fabflix.css"/>
     <!--Let browser know website is optimized for mobile-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Fabflix</title>
-</head>
-<body>
     <!--Import jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
+
+
+    <title>Fabflix</title>
+
+    <style type="text/css">
+      #searchField{
+        left: 150px;
+        font-size: 15px;
+      }
+
+      #autoList{
+        position: fixed;
+        background: white;
+        width: 18%;
+        font-size: 15px;
+      }
+    </style>
+
+    
+
+</head>
+<body>
+    
 
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
@@ -29,7 +49,13 @@
                 <span class="bold">Fabflix</span>
             </a>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li class="active"><a href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
+                <li class="input-field">
+                    <input id="searchField" type="text" class="validate">
+                    <label for="searchField">Quick Search:</label>
+                    <div id="autoList" class="card white"></div>
+                </li>
+                <li><a id="subQS" class="waves-effect waves-light btn"><i class="material-icons">search</i></a></li>
+                <li><a class="active" href="search.jsp"><i class="material-icons left">search</i>Search</a></li>
                 <li><a href="browse.jsp">Browse</a></li>
 <%
                 if (session.getAttribute("cart") != null)
@@ -100,6 +126,43 @@
         </div>
     </div>
 </div>
+
+
+<script type="text/javascript">
+    
+    $(function(){
+      $("#searchField").keyup(function(){
+        $("#autoList").empty();
+
+        $.post("autoComplete.jsp", {"searchStr": $("#searchField").val()}, function(data, status){
+          // $("p").text(data); // prints query
+
+          var arr = data.split("^");
+
+          for(var i = 0; i < arr.length-1 && i < 5; i++){
+            $("#autoList").append("<a class=\"searchList\" href=\"#\">"+arr[i]+"</a>");
+          }
+
+          $(".searchList").click(function(e){
+            e.preventDefault();
+            $("#searchField").val($(this).text());
+          })
+        });
+      });
+
+      $("#subQS").click(function(){
+        window.location.href = "movieList.jsp?title=" + $("#searchField").val();
+      })
+
+      $("#searchField").focusin(function(){
+        $("#autoList").show();
+      });
+
+      $("#searchField").focusout(function(){
+        $("#autoList").hide(1000);
+      });
+    });
+  </script>
 
 </body>
 </html>
