@@ -125,32 +125,38 @@
     
         if((firstName != null && firstName != "") || (lastName != null && lastName != "")) {
         	and = true;
-        	        	
-        	query += ", stars_in_movies where id=movie_id ";
-        	
+        	boolean first = false;
             if(firstName != null && firstName != ""){
             	Statement starsSt = con.createStatement();
             	ResultSet starsRs;
             	starsRs = starsSt.executeQuery("select id from stars where first_name like '" + firstName + "%' ");
+
+            	if (starsRs.next()) {    
+                    query += ", stars_in_movies where id=movie_id and (";
+                    first = true;
+                    do {
+                        query += "star_id=" + starsRs.getInt(1) + " or ";
+                    } while(starsRs.next());
+                    query = query.substring(0,query.length()-3) + ") ";
+                    parameters += "&firstName=" + firstName; 
+                } 
             	
-            	query += "and (";
-            	while(starsRs.next()){
-            		query += "star_id=" + starsRs.getInt(1) + " or ";
-            	}
-            	query = query.substring(0,query.length()-3) + ") ";
-            	parameters += "&firstName=" + firstName;
             }
             if(lastName != null && lastName != ""){
             	Statement starsSt = con.createStatement();
             	ResultSet starsRs;
             	starsRs = starsSt.executeQuery("select id from stars where last_name like '" + lastName + "%' ");
             	
-            	query += "and (";
-            	while(starsRs.next()){
-            		query += "star_id=" + starsRs.getInt(1) + " or ";
-            	}
-            	query = query.substring(0,query.length()-3) + ") ";
-            	parameters += "&lastName=" + lastName;
+                if (starsRs.next()) { 
+                    if(!first) 
+                        query += ", stars_in_movies where id=movie_id ";
+                	query += "and (";
+                	do {
+                		query += "star_id=" + starsRs.getInt(1) + " or ";
+                	} while(starsRs.next());
+                	query = query.substring(0,query.length()-3) + ") ";
+                	parameters += "&lastName=" + lastName;
+                }
             }
         } 
 
@@ -242,7 +248,7 @@ out.print("<div class=\"fixed-action-btn\">" +
                         parameters += "&sort=yearAsc";
                     }
                     else {
-                        query += "order by title asc";
+                        query += "order by title asc ";
                     }
                 %>
             </th>
@@ -254,9 +260,8 @@ out.print("<div class=\"fixed-action-btn\">" +
     <tbody>  
         <%  
             /* run query */
-            moviesRs = moviesSt.executeQuery(query);	
+            moviesRs = moviesSt.executeQuery(query);
 
-          	
             /* store results in arrayList */
             ArrayList<String> resultList = new ArrayList<String>();
 
