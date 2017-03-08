@@ -54,7 +54,7 @@
   br.close();
 
   Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-            "root", mysqlPass);
+            "testuser", "testpass");
 
 
 

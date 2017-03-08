@@ -26,7 +26,7 @@
     br.close();
     Class.forName("com.mysql.jdbc.Driver");
     Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/moviedb",
-            "root", mysqlPass);
+           "testuser", "testpass");
 
 	if (session.getAttribute("email") == null || session.getAttribute("password") == null) {
 		 response.sendRedirect("index.jsp");
