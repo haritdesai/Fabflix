@@ -129,7 +129,7 @@
             if(firstName != null && firstName != ""){
             	Statement starsSt = con.createStatement();
             	ResultSet starsRs;
-            	starsRs = starsSt.executeQuery("select id from stars where first_name like '" + firstName + "%' ");
+            	starsRs = starsSt.executeQuery("select id from stars where first_name like '%" + firstName + "%' " + "or edth(first_name, " + "'" + firstName + "', 2)");
 
             	if (starsRs.next()) {    
                     query += ", stars_in_movies where id=movie_id and (";
@@ -138,14 +138,14 @@
                         query += "star_id=" + starsRs.getInt(1) + " or ";
                     } while(starsRs.next());
                     query = query.substring(0,query.length()-3) + ") ";
-                    parameters += "&firstName=" + firstName; 
+                    parameters += "&firstName= " + firstName; 
                 } 
             	
             }
             if(lastName != null && lastName != ""){
             	Statement starsSt = con.createStatement();
             	ResultSet starsRs;
-            	starsRs = starsSt.executeQuery("select id from stars where last_name like '" + lastName + "%' ");
+            	starsRs = starsSt.executeQuery("select id from stars where last_name like '%" + lastName + "%' " + "or edth(last_name, " + "'" + lastName + "', 2)");
             	
                 if (starsRs.next()) { 
                     if(!first) 
@@ -164,14 +164,14 @@
         	if (and) query += "and ";
         	else and = true;
         	if(!query.contains("where")) query += "where ";
-        	query += "title like '" + title + "%' ";
+        	query += "title like '%" + title + "%' " + "or edth(title, " + "'" + title + "', 2)";
         	parameters += "&title=" + title;
         }
         if(director != null && director != ""){
         	if (and) query += "and ";
         	else and = true;
         	if(!query.contains("where")) query += "where ";
-        	query += "director like '" + director + "%' ";
+        	query += "director like '%" + director + "%' " + "or edth(director, " + director + "', 2)";
         	parameters += "&director=" + director;
         }
         if(year != null && year != ""){
