@@ -9,13 +9,15 @@ Fabflix is a Netflix like website prior to its current streaming functionality w
 
 ## Screencaps
 
+Login Screen
 ![Login](./WebContent/images/login.PNG "Login")
 
 
+Home Screen
 ![Home](./WebContent/images/home.PNG "Home")
 
-
+Search Page
 ![Search](./WebContent/images/search.PNG "Search")
 
-
+Browse Page
 ![Browse](./WebContent/images/browse.PNG "Browse")
